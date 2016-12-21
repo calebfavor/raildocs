@@ -5,20 +5,19 @@ $(function () {
     $('.md-link').click(function () {
         var file = $(this).data('file');
 
-        values=file.split('#');
-        file=values[0];
-        locationInFile=values[1];
-        if(locationInFile){
-            console.log(locationInFile);
+        var paramString = $.param({'current-md': file});
+
+        if (history.pushState) {
+            var currentUrl = [location.protocol, '//', location.host, location.pathname].join('');
+
+            window.history.pushState({path: currentUrl + "?" + paramString}, '', currentUrl +
+                "?" +
+                paramString);
         }
-        
+
         mdContainer.fadeOut(100, function () {
             $.ajax({
-                type: 'GET',
-                url: 'pages/' + file,
-                success: function (html) {
-                    console.log(converter.makeHtml(html));
-                    alert(converter.makeHtml(html));
+                type: 'GET', url: 'pages/' + file, success: function (html) {
                     mdContainer.html(converter.makeHtml(html));
                     mdContainer.fadeIn(100);
                 }
@@ -27,5 +26,23 @@ $(function () {
 
         $('.md-link').removeClass('active');
         $(this).addClass('active');
-    }).first().click();
+    });
+
+    if(getParameterByName('current-md') != null) {
+        $('.md-link[data-file="' + getParameterByName('current-md') + '"]').trigger('click');
+    } else {
+        $('.md-link').first().trigger('click');
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
 });
