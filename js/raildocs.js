@@ -5,6 +5,13 @@ $(function () {
     $('.md-link').click(function () {
         var file = $(this).data('file');
 
+        values=file.split('*');
+        file=values[0];
+        locationInFile=values[1];
+        if(locationInFile){
+            console.log(locationInFile);
+        }
+        
         mdContainer.fadeOut(100, function () {
             $.ajax({
                 type: 'GET',
