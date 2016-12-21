@@ -4,9 +4,7 @@
     1. [Reading through stuff](#reading-through-stuff)
     1. [back to ...?](#back-to)
 
-<div id="looking-for-leads">
-# Looking for Leads
-</div>
+<h2 id="looking-for-leads">Looking for Leads</h2>
 
 google search for: aws ebs cron
 
@@ -17,9 +15,7 @@ good results:
 
 But reading all this, it's all greek to me. I think I might need to actually play with something... or something. Fuck it though, maybe at least read through the above two results.
 
-<div id="reading-through-stuff">
-## Reading through stuff
-</div>
+<h3 id="reading-through-stuff">Reading through stuff</h3>
 
 Starting
 
@@ -68,9 +64,7 @@ Integer porttitor sit amet augue in posuere. Lorem ipsum dolor sit amet, consect
 Praesent et finibus arcu, consequat hendrerit justo. Sed eget sollicitudin nisi, id porta purus. Sed cursus dignissim nunc, sit amet rhoncus est rutrum quis. Phasellus non sapien fermentum, molestie erat sed, pellentesque lectus. Maecenas vitae metus suscipit, lacinia purus pellentesque, consectetur tellus. Aliquam tincidunt dui ut rutrum posuere. Nam id tortor quis nulla egestas imperdiet.
 
 
-<div id="back-to">
-## back to ...?
-</div>
+<h3 id="back-to">back to ...?</h3>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend id ligula pharetra consequat. Pellentesque in aliquam magna, a convallis ante. Phasellus vestibulum at nunc id tincidunt. Integer sodales rutrum nisl. Sed vel imperdiet nisl, ut congue dolor. Pellentesque dapibus, dui at sollicitudin dictum, nulla lectus condimentum ex, vitae varius leo turpis maximus leo. Etiam tincidunt velit tellus, imperdiet rutrum magna tincidunt nec. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas condimentum lacus justo. Maecenas sit amet ultricies lorem. Donec metus odio, malesuada sit amet venenatis sit amet, aliquet congue nisi. Curabitur venenatis turpis id pellentesque pretium. Phasellus in erat in urna egestas auctor eu sed turpis. Nam viverra lobortis libero, vestibulum iaculis ligula porttitor quis. Nam et ipsum quis nulla finibus molestie eget in enim. Proin vehicula euismod leo at facilisis.
 
