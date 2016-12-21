@@ -1,10 +1,8 @@
-## Official Railroad Media developer documentation!
+# Official Railroad Media developer documentation!
 
-Please read the rules and guidelines before going further.
+**Please read the rules and guidelines before going further.**
 
-***
-
-### Rules
+## Rules
 
 
 ```md
@@ -14,7 +12,7 @@ Please read the rules and guidelines before going further.
 4. No sensetive information, such as configuration data or production data. Be mindful when copy/pasting.
 ```
 
-### Guidelines
+## Guidelines
 
 ```md
 - All pages must start with a single H2 - ##
