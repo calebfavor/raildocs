@@ -1,5 +1,10 @@
 # create-new-pages-categories
 
+1. Create a new page
+1. Add page to nav
+    1. Top-level
+    1. Nested
+
 ## Create a new page
 
 In `/pages/` create a file ending in `.md`.
