@@ -1,6 +1,7 @@
 $(function () {
     var mdContainer = $('.md-container');
     var converter = new showdown.Converter();
+    converter.setFlavor('github');
 
     $('.md-link').click(function () {
         var file = $(this).data('file');
