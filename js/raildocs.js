@@ -17,6 +17,8 @@ $(function () {
                 type: 'GET',
                 url: 'pages/' + file,
                 success: function (html) {
+                    console.log(converter.makeHtml(html));
+                    alert(converter.makeHtml(html));
                     mdContainer.html(converter.makeHtml(html));
                     mdContainer.fadeIn(100);
                 }
