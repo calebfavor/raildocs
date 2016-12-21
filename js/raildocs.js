@@ -5,7 +5,7 @@ $(function () {
     $('.md-link').click(function () {
         var file = $(this).data('file');
 
-        values=file.split('*');
+        values=file.split('#');
         file=values[0];
         locationInFile=values[1];
         if(locationInFile){
