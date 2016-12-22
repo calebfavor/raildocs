@@ -5,7 +5,7 @@ Get it running
 -------------------------------------------------
 
 1. pull repo "Pianote"
-2. from project root, run docker-init.bat. If successful, this will finish with you with an ssh connection into the workspace container.
+2. from project root, run ```docker-init.bat```. If successful, this will finish with you with an ssh connection into the workspace container.
 3. In said container
 	1. run ```gulp``` command
 	1. run ```gulp watch``` command
