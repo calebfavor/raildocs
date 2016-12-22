@@ -11,6 +11,6 @@
 
 ## Guidelines
 
-- All pages must start with a single H2 - ##
-- All page sub sections should be started with a H3 - ###
+- All pages must start with a single H1 - #
+- All page sub sections should be started with a H2 - ##
 - Use code samples! The more the better.
