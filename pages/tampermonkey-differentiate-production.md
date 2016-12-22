@@ -7,11 +7,11 @@ Set up a Tampermonkey script ([Chrome browser extension](https://tampermonkey.ne
 
 Example, turn this
 
-[before](http://calebfavor.github.io/raildocs/images/tampermonkey-differentiate-production/before.gif)
+![before](http://calebfavor.github.io/raildocs/images/tampermonkey-differentiate-production/before.gif)
 
 into this
 
-[after](http://calebfavor.github.io/raildocs/images/tampermonkey-differentiate-production/after.gif)
+![after](http://calebfavor.github.io/raildocs/images/tampermonkey-differentiate-production/after.gif)
 
 Here's a script to play with.
 
