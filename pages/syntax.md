@@ -1,4 +1,4 @@
-# Syntax - Showdown Compiler
+# Syntax: Showdown Compiler GitHub Flavor
 
 ## Paragraphs
 
