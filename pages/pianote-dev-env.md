@@ -29,3 +29,9 @@ Stop pianote
 
 1. Go to "/pianote-laradock" directory (in your computer, not container).
 2. Run `docker-compose stop`.
+
+
+Oh, also do this
+--------------------------------------------
+
+![what else to do](http://calebfavor.github.io/raildocs/images/pianote-dev-env-missing.gif)
