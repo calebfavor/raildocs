@@ -20,6 +20,11 @@ $(function () {
             $.ajax({
                 type: 'GET', url: 'pages/' + file, success: function (html) {
                     mdContainer.html(converter.makeHtml(html));
+
+                    $('pre code').each(function(i, block) {
+                        hljs.highlightBlock(block);
+                    });
+
                     mdContainer.fadeIn(100);
                 }
             });
