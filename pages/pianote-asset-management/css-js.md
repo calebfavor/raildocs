@@ -90,6 +90,4 @@ gulp.task('sass', function () {
 
 ## JS
 
-- All pages must start with a single H1 - #
-- All page sub sections should be started with a H2 - ##
-- Use code samples! The more the better.
+Coming soon... Its basically the same as the js.
