@@ -14,6 +14,9 @@
     1. "gotchas"
         1. one
         1. two
+1. Troubleshooting notes
+    1. tail access log
+    1. `CronTestTarget` command for testing functionality.
 
 <!-- /MarkdownTOC -->
 
@@ -130,3 +133,13 @@ Comment-out lines from .htaccess (/var/www/html/public).
 #   RewriteCond %{SERVER_NAME} !^dev*
 #   RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 ```
+
+## Troubleshooting notes
+
+### tail access log
+
+`tail -f /var/log/httpd/access_log`
+
+### `CronTestTarget` command for testing functionality.
+
+The "crontesttarget" command (`\App\Console\Commands\CronTestTarget`) will send an email (address is hardcoded in the `\App\Mail\CronTestEmail` Mailable class — obviously change as needed) will send an email and log some info. Real handy.
