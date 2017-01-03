@@ -1,4 +1,4 @@
-# aws-ebs-cron-jobs.md (working notes)
+# AWS EBS Cron Jobs
 
 <!-- MarkdownTOC -->
 
@@ -46,7 +46,7 @@ cron.yaml:
 version: 1
 cron:
  - name: "schedule"
-   url: "/worker/queue"
+   url: "/worker/schedule"
    schedule: "* * * * *"
 ```
 
