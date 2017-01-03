@@ -4,7 +4,7 @@
 
 <!-- /MarkdownTOC -->
 
-See page about AWS EBS Cron jobs.
+See [page about AWS EBS Cron jobs](https://calebfavor.github.io/raildocs/?current-md=aws-ebs-cron-jobs.md).
 
 There's a package that enables us to every minute run the App\Console\Kernel@schedule event. Running this event will basically pass cron job functionally from cron jobs to Laravel's Event Scheduling functionality. Again, see the page about EBS Cron jobs.
 
