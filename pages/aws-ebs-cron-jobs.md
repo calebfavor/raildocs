@@ -59,6 +59,15 @@ The url will be called every minute. Do not change this*.
 
 This "worker/schedule" route is supplied by the *dusterio/laravel-aws-worker* package and will call the `schedule` method of `App\Console\Kernel::class`. This is where you define what (custom Artisan) commands to call — and when to call them. Specify when to call them [as per the Laravel documentation](https://laravel.com/docs/5.3/scheduling).
 
+```php
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command('renewals')->cron("0 */8 * * *");
+}
+```
+
+This will run the `Renewals` command (whose signature is "renewals"), [every eight hours](https://crontab.guru/#0_*/8_*_*_*).
+
 #### Protecting the new routes on the "web" environment
 
 ##### Riddle
