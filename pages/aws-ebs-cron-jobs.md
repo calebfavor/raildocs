@@ -14,6 +14,7 @@
     1. "gotchas"
         1. one
         1. two
+1. Deployment
 1. Troubleshooting notes
     1. tail access log
     1. `CronTestTarget` command for testing functionality.
@@ -125,27 +126,8 @@ Same with ssh.
     * [ ] set it to `true` for the worker-environment
     * [ ] set it to `false` for the web-environment
 1. [ ] Make sure the "document root" is set to `/public/` (found in "Configuration" → "Software Configuration" → "Container Options")
-1. [ ] deploy to worker (something along the lines of `eb deploy pianote-worker-alejendra`).
-1. [ ] after you deploy, ssh into the worker and 
-    1. [ ] comment out the sections of .htaccess (in /public) that ~~... forces www and https... ?~~ ... the sections shown below...
-        * get there with this: `sudo nano /var/www/html/public/.htaccess`
-        * It'll look like this:
-            ```
-                # Force WWW
-            #    RewriteCond %{HTTP_HOST} !^dev* [NC]
-            #    RewriteCond %{HTTP_HOST} !^$
-            #    RewriteCond %{HTTP_HOST} !^www\. [NC]
-            #    RewriteCond %{HTTPS} !=on
-            #    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-                # Force HTTPS
-            #    RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
-            #    RewriteCond %{HTTP:X-Forwarded-Proto} =""
-            #    RewriteCond %{HTTPS} !=on
-            #    RewriteCond %{SERVER_NAME} !^dev*
-            #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
-            ```
-    1. [ ] change permissions of `storage/` directory by running (likely) `sudo chmod -R 777 /var/www/html/storage/`
+See "Deployment" section.
 
 ### "gotchas"
 
@@ -174,6 +156,30 @@ Comment-out lines from .htaccess (/var/www/html/public).
 #   RewriteCond %{SERVER_NAME} !^dev*
 #   RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 ```
+
+## Deployment
+
+1. [ ] deploy to worker (something along the lines of `eb deploy pianote-worker-alejendra`).
+1. [ ] after you deploy, ssh into the worker and 
+    1. [ ] comment out the sections of .htaccess (in /public) that ~~... forces www and https... ?~~ ... the sections shown below...
+        * get there with this: `sudo nano /var/www/html/public/.htaccess`
+        * It'll look like this:
+            ```
+                # Force WWW
+            #    RewriteCond %{HTTP_HOST} !^dev* [NC]
+            #    RewriteCond %{HTTP_HOST} !^$
+            #    RewriteCond %{HTTP_HOST} !^www\. [NC]
+            #    RewriteCond %{HTTPS} !=on
+            #    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+                # Force HTTPS
+            #    RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+            #    RewriteCond %{HTTP:X-Forwarded-Proto} =""
+            #    RewriteCond %{HTTPS} !=on
+            #    RewriteCond %{SERVER_NAME} !^dev*
+            #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+            ```
+    1. [ ] change permissions of `storage/` directory by running (likely) `sudo chmod -R 777 /var/www/html/storage/`
 
 ## Troubleshooting notes
 
