@@ -17,6 +17,7 @@
 1. Troubleshooting notes
     1. tail access log
     1. `CronTestTarget` command for testing functionality.
+1. Todo
 
 <!-- /MarkdownTOC -->
 
@@ -110,10 +111,39 @@ Same with ssh.
 ### instructions
 
 1. [ ] Follow instructions for *dusterio/laravel-aws-worker* package
-2. [ ] create "REGISTER_WORKER_ROUTES" environment variable
+1. [ ] Create worker environment for your application
+    * Create a queue to use.
+    * "Actions" → "Create Environment" → "Create Worker"
+    * there may be a saved environment configuration you can use. If there is note, copy (manually, arg) from the 'web' environment. Don't clone.
+        * for Pianote — as of January 4th 2017 — there exists a "pianote-worker-env-louisa" saved configuration you can use for Pianote.
+    * You can chose the default settings, **except**
+        * "Worker Details" → "HTTP path" *must* be `/worker/queue`.
+    * in "Worker Details" you'll keep the default "Worker queue" option of "Autogenerate queue". This means that as described in the *dusterio/laravel-aws-worker* package instructions, you must specify the queue to be used. Refer to those instructions, setting the queue name as an environment variable that is passed into the `config/queue.php` file.
+        * if you used the "pianote-worker-env-louisa" there are "SQS_QUEUE" and "SQS_QUEUE_URL"
+        * Remember —as per the *dusterio/laravel-aws-worker* package instructions— to set the sqs queue url not as the actual url noted in the SQS details, but rather just as the first two sections, So, instead of `https://sqs.us-east-1.amazonaws.com/671790291617/awseb-e-83z72jgszx-stack-AWSEBWorkerQueue-ZZUA42F2JETR`, you'll have just `https://sqs.us-east-1.amazonaws.com/671790291617` (truncate it so it ends with your user number. Also, note that there' no trailing slash).
+1. [ ] `REGISTER_WORKER_ROUTES` environment variable
     * [ ] set it to `true` for the worker-environment
     * [ ] set it to `false` for the web-environment
-3. [ ] deploy to worker.
+1. [ ] Make sure the "document root" is set to `/public/` (found in "Configuration" → "Software Configuration" → "Container Options")
+1. [ ] deploy to worker (something along the lines of `eb deploy pianote-worker-alejendra`).
+1. [ ] after you deploy, ssh into the worker and comment out the sections of .htaccess (in /public) that ~~... forces www and https... ?~~ ... the sections shown below...
+    * get there with this: `sudo nano /var/www/html/public/.htaccess`
+    * It'll look like this:
+    ```
+        # Force WWW
+    #    RewriteCond %{HTTP_HOST} !^dev* [NC]
+    #    RewriteCond %{HTTP_HOST} !^$
+    #    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    #    RewriteCond %{HTTPS} !=on
+    #    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+        # Force HTTPS
+    #    RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+    #    RewriteCond %{HTTP:X-Forwarded-Proto} =""
+    #    RewriteCond %{HTTPS} !=on
+    #    RewriteCond %{SERVER_NAME} !^dev*
+    #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+    ```
 
 ### "gotchas"
 
@@ -152,3 +182,7 @@ Comment-out lines from .htaccess (/var/www/html/public).
 ### `CronTestTarget` command for testing functionality.
 
 The "crontesttarget" command (`\App\Console\Commands\CronTestTarget`) will send an email (address is hardcoded in the `\App\Mail\CronTestEmail` Mailable class — obviously change as needed) will send an email and log some info. Real handy.
+
+## Todo
+
+Handling of failed messages. Right now we're just notified of failed renewals via the logs, and failed messages go to the "Dead letter queue".
