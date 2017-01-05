@@ -19,4 +19,3 @@ successfuldrumming-com
 freedrumlessons-com
 drumlessons-com
 ```
-1. Done!
