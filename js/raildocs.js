@@ -16,14 +16,14 @@ $(function () {
                 paramString);
         }
 
-        mdContainer.fadeOut(100, function () {
+        mdContainer.fadeOut(60, function () {
             $.ajax({
                 type: 'GET', url: 'pages/' + file, success: function (html) {
                     mdContainer.html(converter.makeHtml(html));
 
                     Prism.highlightAll(true, function(){});
 
-                    mdContainer.fadeIn(100);
+                    mdContainer.fadeIn(60);
                 }
             });
         });
