@@ -36,3 +36,7 @@ h1 {
 .small-text{
     font-size: 0.75em;
 }
+
+.top-level-link {
+    font-size: 12pt;
+}
