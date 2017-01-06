@@ -3,7 +3,7 @@
 ## /members Steps
 
 1. On your local, run the built in wordpress update
-1. When/if it asks run the database update as well on your local
+1. When/if it asks to run the database update, run it
 1. Open wp-login.php and remove the reset link outer quotes (its hidden in gmail otherwise), change the line:
 ```php
 // CHANGE THIS
