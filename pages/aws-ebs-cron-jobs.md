@@ -2,6 +2,8 @@
 
 <!-- MarkdownTOC -->
 
+1. Setup
+1. Deployment
 1. How does this work?
     1. Documentation
     1. How does this work?
@@ -9,18 +11,65 @@
         1. A little explaination maybe?
         1. Protecting the new routes on the "web" environment
     1. How do I deploy? How do I ssh in?
-1. setup
-    1. instructions
-    1. "gotchas"
-        1. one
-        1. two
-1. Deployment
 1. Troubleshooting notes
     1. tail access log
     1. `CronTestTarget` command for testing functionality.
+    1. "gotchas"
+        1. one
+        1. two
 1. Todo
 
 <!-- /MarkdownTOC -->
+
+## Setup
+
+1. [ ] Follow instructions for *dusterio/laravel-aws-worker* package
+1. [ ] Create worker environment for your application
+    * You do not need to create a queue to use
+        * you will configure —or use a saved configuration that configures— the worker environment to generate a queue (and dead-letter queueu) upon creation|rebuilding.
+    * "Actions" → "Create Environment" → "Create Worker"
+    * there may be a saved environment configuration you can use. If there is not, copy (manually, arg) from the 'web' environment. Don't clone.
+        * for Pianote — as of January 10th 2017 — you can use "pianote-worker-isabella"
+    * You can chose the default settings, **except**
+        * "Worker Details" → "HTTP path" *must* be `/worker/queue`.
+    * in "Worker Details" you'll keep the default "Worker queue" option of "Autogenerate queue". This means that as described in the *dusterio/laravel-aws-worker* package instructions, you must specify the queue to be used. Refer to those instructions, setting the queue name as an environment variable that is passed into the `config/queue.php` file.
+        * if you used the "pianote-worker-env-isabella" there are "SQS_QUEUE" and "SQS_QUEUE_URL" environment variables available to set ("Configuration" → "Software Configuration" → "Environment Properties")
+        * Remember —as per the *dusterio/laravel-aws-worker* package instructions— to set the sqs queue url not as the actual url noted in the SQS details, but rather just as the first two sections, So, instead of `https://sqs.us-east-1.amazonaws.com/671790291617/awseb-e-83z72jgszx-stack-AWSEBWorkerQueue-ZZUA42F2JETR`, you'll have just `https://sqs.us-east-1.amazonaws.com/671790291617` (truncate it so it ends with your user number. Also, note that there' no trailing slash).
+1. [ ] `REGISTER_WORKER_ROUTES` environment variable
+    * [ ] set it to `true` for the worker-environment
+    * [ ] set it to `false` for the web-environment
+1. [ ] Make sure the "document root" is set to `/public/` (found in "Configuration" → "Software Configuration" → "Container Options")
+
+**Continue with instructions in "Deployment" section below.**
+
+## Deployment
+
+1. [ ] Commit your changes.
+1. [ ] right before commiting
+    1. [ ] Pull to ensure you're deploying the latest version of the application.
+    1. [ ] run the `gulp` command locally. to ensure compiled assets haved changed. I'm not sure if this is required for the worker, but it doesn't seem like a risk worth taking. You definitely want to do this when deploying the web environment, so just make a habit of it.
+1. [ ] deploy to worker (something along the lines of `eb deploy pianote-worker-alejendra`).
+1. [ ] after you deploy, ssh into the worker and 
+    1. [ ] comment out the following sections of .htaccess (in /public):
+        * get there with this: `sudo nano /var/www/html/public/.htaccess`
+        * It'll look like this:
+            ```
+                # Force WWW
+            #    RewriteCond %{HTTP_HOST} !^dev* [NC]
+            #    RewriteCond %{HTTP_HOST} !^$
+            #    RewriteCond %{HTTP_HOST} !^www\. [NC]
+            #    RewriteCond %{HTTPS} !=on
+            #    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+                # Force HTTPS
+            #    RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+            #    RewriteCond %{HTTP:X-Forwarded-Proto} =""
+            #    RewriteCond %{HTTPS} !=on
+            #    RewriteCond %{SERVER_NAME} !^dev*
+            #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
+            ```
+    1. [ ] change permissions of `storage/` directory by running (likely) `sudo chmod -R 777 /var/www/html/storage/`
+
 
 ## How does this work?
 
@@ -107,31 +156,19 @@ Same with ssh.
 `eb ssh pianote-worker-env-louisa` to ssh into "*pianote-worker-env-louisa*".
 
 
-## setup
+## Troubleshooting notes
 
-### instructions
+### tail access log
 
-1. [ ] Follow instructions for *dusterio/laravel-aws-worker* package
-1. [ ] Create worker environment for your application
-    * Create a queue to use.
-    * "Actions" → "Create Environment" → "Create Worker"
-    * there may be a saved environment configuration you can use. If there is note, copy (manually, arg) from the 'web' environment. Don't clone.
-        * for Pianote — as of January 4th 2017 — there exists a "pianote-worker-env-louisa" saved configuration you can use for Pianote.
-    * You can chose the default settings, **except**
-        * "Worker Details" → "HTTP path" *must* be `/worker/queue`.
-    * in "Worker Details" you'll keep the default "Worker queue" option of "Autogenerate queue". This means that as described in the *dusterio/laravel-aws-worker* package instructions, you must specify the queue to be used. Refer to those instructions, setting the queue name as an environment variable that is passed into the `config/queue.php` file.
-        * if you used the "pianote-worker-env-louisa" there are "SQS_QUEUE" and "SQS_QUEUE_URL"
-        * Remember —as per the *dusterio/laravel-aws-worker* package instructions— to set the sqs queue url not as the actual url noted in the SQS details, but rather just as the first two sections, So, instead of `https://sqs.us-east-1.amazonaws.com/671790291617/awseb-e-83z72jgszx-stack-AWSEBWorkerQueue-ZZUA42F2JETR`, you'll have just `https://sqs.us-east-1.amazonaws.com/671790291617` (truncate it so it ends with your user number. Also, note that there' no trailing slash).
-1. [ ] `REGISTER_WORKER_ROUTES` environment variable
-    * [ ] set it to `true` for the worker-environment
-    * [ ] set it to `false` for the web-environment
-1. [ ] Make sure the "document root" is set to `/public/` (found in "Configuration" → "Software Configuration" → "Container Options")
+`tail -f /var/log/httpd/access_log`
 
-See "Deployment" section.
+### `CronTestTarget` command for testing functionality.
+
+The "crontesttarget" command (`\App\Console\Commands\CronTestTarget`) will send an email (address is hardcoded in the `\App\Mail\CronTestEmail` Mailable class — obviously change as needed) will send an email and log some info. Real handy.
 
 ### "gotchas"
 
-(all in worker environment unless noted otherwise)
+If you fail to do these when you deploy you're gonna have a bad time.
 
 #### one
 
@@ -157,39 +194,6 @@ Comment-out lines from .htaccess (/var/www/html/public).
 #   RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 ```
 
-## Deployment
-
-1. [ ] deploy to worker (something along the lines of `eb deploy pianote-worker-alejendra`).
-1. [ ] after you deploy, ssh into the worker and 
-    1. [ ] comment out the sections of .htaccess (in /public) that ~~... forces www and https... ?~~ ... the sections shown below...
-        * get there with this: `sudo nano /var/www/html/public/.htaccess`
-        * It'll look like this:
-            ```
-                # Force WWW
-            #    RewriteCond %{HTTP_HOST} !^dev* [NC]
-            #    RewriteCond %{HTTP_HOST} !^$
-            #    RewriteCond %{HTTP_HOST} !^www\. [NC]
-            #    RewriteCond %{HTTPS} !=on
-            #    RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-                # Force HTTPS
-            #    RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
-            #    RewriteCond %{HTTP:X-Forwarded-Proto} =""
-            #    RewriteCond %{HTTPS} !=on
-            #    RewriteCond %{SERVER_NAME} !^dev*
-            #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
-            ```
-    1. [ ] change permissions of `storage/` directory by running (likely) `sudo chmod -R 777 /var/www/html/storage/`
-
-## Troubleshooting notes
-
-### tail access log
-
-`tail -f /var/log/httpd/access_log`
-
-### `CronTestTarget` command for testing functionality.
-
-The "crontesttarget" command (`\App\Console\Commands\CronTestTarget`) will send an email (address is hardcoded in the `\App\Mail\CronTestEmail` Mailable class — obviously change as needed) will send an email and log some info. Real handy.
 
 ## Todo
 
