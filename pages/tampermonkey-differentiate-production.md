@@ -46,3 +46,9 @@ Here's a script to play with.
     // end of your code here.
 })();
 ```
+
+Need one for drumeo? Use this css...
+
+``` css
+body, body > * {background: lightyellow !important};
+```
