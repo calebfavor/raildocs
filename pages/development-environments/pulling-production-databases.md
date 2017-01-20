@@ -2,6 +2,14 @@
 
 ## Drumeo
 
+### TLDR
+
+1. ssh into pianote mysql container
+1. Run: `/var/www/laradock-drumeo/development-helpers/pull-databases.sh`
+1. When prompted enter password from Lastpass secure note.
+
+### Detailed version of instructions
+
 *NOTE: This will take around 20 minutes. There is a lot of data.*
 
 1. Open command prompt, navigate too project root (C:\web-development-environment\drumeo).
@@ -27,4 +35,6 @@ cd /var/www/laradock-drumeo/development-helpers
 
 ## Pianote
 
-*Coming Soon...*
+1. ssh into pianote mysql container
+1. Run: `/var/www/laravel/laradock-pianote/development-helpers/pull-databases.sh`
+1. When prompted enter password from Lastpass secure note.
