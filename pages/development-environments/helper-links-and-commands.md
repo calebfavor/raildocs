@@ -4,7 +4,7 @@
 
 - Inside project laradock-* folder, to start server:
 ```cmd
-docker-compose up -d apache2 mysql phpmyadmin
+docker-compose up -d apache2 mysql phpmyadmin redis
 ```
 
 - To stop the server:
