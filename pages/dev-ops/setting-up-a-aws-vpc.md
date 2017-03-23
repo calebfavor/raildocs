@@ -80,7 +80,7 @@ since kuberneters will create its own ec2 subnets in our VPC.
 
 ## Your Done! See additional steps below if you want.
 
-## Creating The RDS Database Subnet Group (optional)
+## Creating The RDS Database Subnet Group
 
 1. To go the RDS Dashboard
 1. Click Subnet Groups in the left menu panel
@@ -93,7 +93,7 @@ since kuberneters will create its own ec2 subnets in our VPC.
 1. Choose your other database subnet (10.0.3.0/24) and click Add
 1. Click create
 
-## Creating The RDS Instance (optional)
+## Creating The RDS Instance
 
 1. Click Instances in the left menu panel
 1. Click Launch DB Instance
