@@ -1,6 +1,10 @@
 # Setting Up A New AWS VPC For Production Kubernetes (or staging)
 
+**NOTE: There is an internal networking dns issue with launching kubernetes stacks in to existing VPCs.
+This guide is DEPRECATED. Let KOPs make your VPC.** 
+
 ## Creating the VPC
+
 
 1. In your chosen aws region, go to the VPC Dashboard
 1. Click create VPC
