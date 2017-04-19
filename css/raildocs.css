@@ -40,3 +40,12 @@ h1 {
 .top-level-link {
     font-size: 12pt;
 }
+
+.menu-header {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.nav.nav-pills {
+    margin-bottom: 25px;
+}

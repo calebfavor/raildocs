@@ -23,6 +23,8 @@ $(function () {
 
                     Prism.highlightAll(true, function(){});
 
+                    $("html, body").animate({ scrollTop: 0 }, 150);
+
                     mdContainer.fadeIn(60);
                 }
             });
