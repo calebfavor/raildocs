@@ -25,7 +25,7 @@
 1. Name: laravel, type: SFTP
 1. SFTP host: 10.0.75.2, Port: 22, Root path: /var/www 
 1. Username: root, Auth type: Key pair (OpenSSH or Putty)
-1. Private key file: C:\web-development-environment\drumeo\laradock-drumeo\workspace\insecure_id_rsa.ppk
+1. Private key file: C:\web-development-environment\drumeo\laradock-drumeo\workspace\insecure_id_rsa (ppk files not longer supported!)
 1. Keyphrase: *leave empty*
 
 ### Go to Settings -> Languages and Frameworks -> PHP
@@ -44,7 +44,7 @@
 1. Add new: By Remote Interpreter
 1. Choose the laravel interpreter we made
 1. Add Path mapping: C:/web-development-environment/drumeo -> /var/www
-1. PHPUnit library: User Composer autoloader: Path to script: /var/www/laravel/bootstrap/autoload.php
+1. PHPUnit library: User Composer autoloader: Path to script: /var/www/laravel/vendor/autoload.php
 1. Check: Default configuration file, set to: /var/www/laravel/phpunit.xml
 
 ## Web Debugging Setup Pianote
@@ -64,9 +64,9 @@
 
 1. Add new
 1. Name: laravel, type: SFTP
-1. SFTP host: 10.0.75.2, Port: 22, Root path: /var/www/laravel 
+1. SFTP host: 10.0.75.2, Port: 2222 (or other specified ssh port based on project), Root path: /var/www/laravel 
 1. Username: root, Auth type: Key pair (OpenSSH or Putty)
-1. Private key file: C:\web-development-environment\pianote\laradock-pianote\workspace\insecure_id_rsa.ppk
+1. Private key file: C:\web-development-environment\pianote\laradock-pianote\workspace\insecure_id_rsa
 1. Keyphrase: *leave empty*
 
 ### Go to Settings -> Languages and Frameworks -> PHP
@@ -85,5 +85,5 @@
 1. Add new: By Remote Interpreter
 1. Choose the laravel interpreter we made
 1. Add Path mapping: C:/web-development-environment/pianote -> /var/www/html
-1. PHPUnit library: User Composer autoloader: Path to script: /var/www/laravel/bootstrap/autoload.php
+1. PHPUnit library: User Composer autoloader: Path to script: /var/www/laravel/vendor/autoload.php
 1. Check: Default configuration file, set to: /var/www/laravel/phpunit.xml
