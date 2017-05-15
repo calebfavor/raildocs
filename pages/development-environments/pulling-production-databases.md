@@ -5,7 +5,7 @@
 ### TLDR
 
 1. ssh into drumeo ***mysql*** container
-1. Run: `/var/www/laradock-drumeo/development-helpers/pull-databases.sh`
+1. Run: `/var/www/laradock-drumeo-2017/development-helpers/pull-databases.sh`
 1. When prompted enter password from Lastpass secure note.
 
 ### Detailed version of instructions
@@ -22,9 +22,9 @@ docker ps
 ```cmd
 docker exec -it FIRST_4_CHARACTERS bash
 ```
-5. Once in the container navigate to (/var/www/laradock-drumeo/development-helpers)
+5. Once in the container navigate to (/var/www/laradock-drumeo-2017/development-helpers)
 ```cmd
-cd /var/www/laradock-drumeo/development-helpers
+cd /var/www/laradock-drumeo-2017/development-helpers
 ```
 6. Then run the script command:
 ```cmd
