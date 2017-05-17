@@ -1,3 +1,5 @@
-# raildocs Readme
+# RailDocs
 
-[Link to RailDocs](https://railroadmedia.github.io/raildocs/?current-md=guidelines%2Fguidelines.md)
+The official Railroad Media technical documentation.
+
+[https://railroadmedia.github.io/raildocs](https://railroadmedia.github.io/raildocs)
