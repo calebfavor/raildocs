@@ -23,6 +23,7 @@
 
 .active {
     font-weight: bold;
+    color: #0aac2d !important;
 }
 
 hr {
@@ -48,4 +49,8 @@ h1 {
 
 .nav.nav-pills {
     margin-bottom: 25px;
+}
+
+.nav-item {
+    margin-bottom: 8px;
 }

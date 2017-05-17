@@ -75,7 +75,7 @@
 1. Click add -> Remote
 1. Choose the laravel deployment configuration
 1. PHP executable: /usr/bin/php, (click the refresh button beside this once to make sure its connected)
-1. Debugger extentions: /usr/lib/php/20151012/xdebug.so
+1. Debugger extentions: /usr/lib/php/20160303/xdebug.so
 1. Apply
 1. Set the CLI Interpreter to the one you just made
 1. Set path mapping to: C:/web-development-environment/pianote -> /var/www/html
