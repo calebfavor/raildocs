@@ -56,7 +56,7 @@ for more information.
 **Note:**    
 In live preview editors, when a paragraph is followed by a list it can cause an awkward effect.
 
-![awkward effect](http://i.imgur.com/YQ9iHTL.gif)
+![awkward effect](https://i.imgur.com/YQ9iHTL.gif)
 
 You can prevent this by enabling the option "smoothPreview".
 
