@@ -2,6 +2,8 @@
 
 *\*\* **Note**: This is for windows.*
 
+*\*\* **Note**: Production always deploys the 'master' branch. Staging always deploys the 'staging' branch.*
+
 ## Pulling and Building the Railkubernetes Container
 
 1\. Clone the railkubernetes repository in to your development environment folder 
