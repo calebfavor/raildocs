@@ -33,3 +33,10 @@ kubectl get pods
  kubectl delete pods --all
  ```
  3\. Wait for the pods to rebuild and see if its fixed
+ 
+ ### Check the PodLlogs
+ 1\. If a pod is in a bad state like: ImagePullBackoff you can view its events with:
+ ```cmd
+ kube desribe pod NAME
+ ```
+ 2\. The events at the bottom of that dump should give you useful information
