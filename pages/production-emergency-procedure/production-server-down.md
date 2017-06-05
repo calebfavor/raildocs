@@ -20,23 +20,29 @@ kubectl get pods
 ```
 7\. If everything is running properly you should see something like:
 
-![kubectl-get-pods](/images/production-emergency-procedure/kubectl-get-pods-dump.png)
+![kubectl-get-pods](/raildocs/images/production-emergency-procedure/kubectl-get-pods-dump.png)
 
 ### Finding the Problem
 
 1\. If you see anything other than 'Running' under status for a pod, that means its down or having problems
 
 ### What to do first
+
 1\. Try re-deploying
-2\. If that doesn't work, try deleting all the pods so they automatically rebuild (this will cause downtime)
- ```cmd
- kubectl delete pods --all
- ```
- 3\. Wait for the pods to rebuild and see if its fixed
- 
- ### Check the PodLlogs
- 1\. If a pod is in a bad state like: ImagePullBackoff you can view its events with:
- ```cmd
- kube desribe pod NAME
- ```
- 2\. The events at the bottom of that dump should give you useful information
+2\. If that doesnt work, try deleting all the pods so they automatically rebuild (this will cause downtime)
+
+```cmd
+kubectl delete pods --all
+```
+
+3\. Wait for the pods to rebuild and see if its fixed
+
+### Check the Pod Logs
+
+1\. If a pod is in a bad state like: **ImagePullBackoff** you can view its events with:
+
+```cmd
+kubectl desribe pod NAME
+```
+
+2\. The events at the bottom of that dump should give you useful information
