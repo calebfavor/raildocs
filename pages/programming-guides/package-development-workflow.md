@@ -11,12 +11,13 @@ Packages should be totally independent of your main application. They should be 
 ## Setting Up the Folders & Files
 
 ### Folder Structure
-1. If not already created, create a packages folder outside the laravel folder
+1. If not already created, create a packages folder outside the laravel/your-application folder
+1. For railroad its (C:\web-development-environment\packages)
 1. Inside the packages folder create your package folder
 1. The tree looks like this
 
 ```text
---- laravel
+--- my-app
 --- packages
 ------ my-namespace
 --------- my-package-1
@@ -39,6 +40,10 @@ Packages should be totally independent of your main application. They should be 
     "repositories": [
         {
             "type": "path",
+            
+            // NOTE: since our laravel installation is in a subfolder in our project it will be:
+            // "url": "../../packages/my-namespace/my-package-1"
+            
             "url": "../packages/my-namespace/my-package-1"
         },
         {
