@@ -51,4 +51,12 @@ Packages should be totally independent of your main application. They should be 
 1. Change composer.json to fit your needs
 1. Setup your service provider
 1. Run: composer install inside your package folder
-1. Start developing!
+1. Add your packages service provider to your main applications config/app.php
+```php
+'providers' => [
+    // ...
+    MyNamespace/MyPackageName/Providers/MyProvider::class,
+};
+
+```
+**Start developing!**
