@@ -45,3 +45,10 @@ Packages should be totally independent of your main application. They should be 
     }
 }
 ```
+
+## Cloning the Template
+1. Copy/download the laravel-package-template repository in to your folder: https://github.com/railroadmedia/laravel-package-template 
+1. Change composer.json to fit your needs
+1. Setup your service provider
+1. Run: composer install inside your package folder
+1. Start developing!
