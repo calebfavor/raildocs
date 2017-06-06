@@ -18,12 +18,17 @@ Packages should be totally independent of your main application. They should be 
 ```text
 --- laravel
 --- packages
------- my-package-1
---------- composer.json
---------- other package files...
------- my-package-2
---------- composer.json
---------- other package files...
+------ my-namespace
+--------- my-package-1
+------------ composer.json
+------------ other package files...
+--------- my-package-2
+------------ composer.json
+------------ other package files...
+------ my-other-namespace
+--------- my-package-3
+------------ composer.json
+------------ other package files...
 ------ etc...
 ```
 
@@ -34,16 +39,21 @@ Packages should be totally independent of your main application. They should be 
     "repositories": [
         {
             "type": "path",
-            "url": "../packages/my-package-1"
+            "url": "../packages/my-namespace/my-package-1"
         },
         {
             "type": "path",
-            "url": "../packages/my-package-2"
+            "url": "../packages/my-namespace/my-package-2"
+        },
+        {
+            "type": "path",
+            "url": "../packages/my-other-namespace/my-package-3"
         }
     ],
     "require": {
-        "my/package-1": "*",
-        "my/package-2": "*"
+        "my-namespace/package-1": "*",
+        "my-namespace/package-2": "*",
+        "my-namespace/package-3": "*"
     }
 }
 ```
