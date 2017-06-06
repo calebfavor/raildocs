@@ -6,6 +6,8 @@ This is primarily based on this article https://www.sitepoint.com/alternative-la
 
 Packages should be totally independent of your main application. They should be individually tested and fully functional without any reliance on your app. Each package will have it own full laravel installation. However this guide shows you how to develop the package and test it inside your main application while still keeping the package separate. Using local composer repositories you can make changes to your package and have it instantly updated in your application instead of pushing to packagist and having to composer update in your application for every change. 
 
+**NOTE: This is ONLY for development, in production your package should have a release and be on packagist. It should be pulled in in your main applications composer.json like a normal package.
+
 ## Setting Up the Folders & Files
 
 ### Folder Structure
