@@ -23,7 +23,7 @@
 
 1. Add new
 1. Name: laravel, type: SFTP
-1. SFTP host: 10.0.75.2, Port: 22, Root path: /var/www 
+1. SFTP host: 10.0.75.2, Port: 2222, Root path: /var/www 
 1. Username: root, Auth type: Key pair (OpenSSH or Putty)
 1. Private key file: C:\web-development-environment\drumeo\laradock-drumeo-2017\workspace\insecure_id_rsa (ppk files not longer supported!)
 1. Keyphrase: *leave empty*
@@ -34,7 +34,7 @@
 1. Click add -> Remote
 1. Choose the laravel deployment configuration
 1. PHP executable: /usr/bin/php, (click the refresh button beside this once to make sure its connected)
-1. Debugger extentions: /usr/lib/php/20151012/xdebug.so
+1. Debugger extentions: /usr/lib/php/20160303/xdebug.so
 1. Apply
 1. Set the CLI Interpreter to the one you just made
 1. Set path mapping to: C:/web-development-environment/drumeo -> /var/www
