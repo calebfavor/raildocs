@@ -43,16 +43,13 @@ You cannot create the packages folder directly in the web-applications folder un
 
 
 ### Using the Packages in Your Application
+
 1. In your main laravel applications composer.json add your repositories like so:
 ```json
 {
     "repositories": [
         {
             "type": "path",
-            
-            // NOTE: since our laravel installation is in a subfolder in our project it will be:
-            // "url": "../../packages/my-namespace/my-package-1"
-            
             "url": "../packages/my-namespace/my-package-1"
         },
         {
@@ -72,12 +69,41 @@ You cannot create the packages folder directly in the web-applications folder un
 }
 ```
 
+(note that repositories is an array)
+
+The url path is relative to the laravel/composer.json file. Thus the above example assumes your `packages` dir is a *sibling* of your `laravel` dir and a *child* of your application dir:
+
+```
+C:\
+---web-wordspace
+------ my-app
+--------- packages
+------------ my-namespace
+--------------- my-package-1
+```
+
+
+However, if your `packages` dir is a **sibling** of your application dir...
+ 
+```
+C:\
+---web-wordspace
+------ my-app
+------ packages
+--------- my-namespace
+------------ my-package-1
+``` 
+ 
+... the path would instead be defined as `"../../packages/my-namespace/my-package-1"`
+
+
 ## Cloning the Template
 
 1. Copy/download the laravel-package-template repository in to your folder: https://github.com/railroadmedia/laravel-package-template 
 1. Change composer.json to fit your needs
 1. Setup your service provider
 1. Run: composer install inside your package folder
+    * You should see a message that mentions symlinking your local package development directory (the one that you just made)
 
 ### In your main applications' config/app.php file add your package's...
 
@@ -99,7 +125,7 @@ For Drumeo as of June 2017, this is: *C:\web-development-environment\drumeo\lara
     //...
     "psr-4": {
         //...
-        "Railroad\\SixtwentyPracticePackage\\Providers\\": "src"
+        "MyNamespace\\MyPackageName\\Providers\\": "src"
     },
 }
 ```
