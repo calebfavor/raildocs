@@ -122,28 +122,26 @@ C:\
     * You should see a message that mentions symlinking your local package development directory (the one that you just made) like this: `  - Installing my-namespace/my-package-1 (dev-my-package-1): Symlinking from ../packages/my-namespace/my-package`
 `
 
-### In your main applications' config/app.php file add your package's...
+### Add your package to your main applications' config/app.php file 
 
-For Drumeo as of June 2017, this is: *C:\web-development-environment\drumeo\laravel\config\app.php*
+(For Drumeo as of June 2017, this is: *C:\web-development-environment\drumeo\laravel\config\app.php*)
 
 1. add service provider
 
 ```php
 'providers' => [
-    // ...
     MyNamespace/MyPackageName/Providers/MyProvider::class,
 };
 ```
 
-2. Add your package('s namespace and "src" directory) to the psr-4 section of "autoload":
+2. Add your package to the psr-4 section of "autoload" (namespace and the dir with the actual business logic of your package - likely the "src" directory)
 
 ```php
 "autoload": {
-    //...
     "psr-4": {
-        //...
-        "MyNamespace\\MyPackageName\\Providers\\": "src"
+        "MyNamespace\\MyPackageName\\": "src"
     },
 }
 ```
+
 **Start developing!**
