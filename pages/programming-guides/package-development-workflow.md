@@ -69,7 +69,23 @@ You cannot create the packages folder directly in the web-applications folder un
 }
 ```
 
-(note that repositories is an array)
+#### Notes
+
+##### Note 1
+
+repositories is an array
+
+##### Note 2
+
+you may need to specify the version not as the wild-card used above (`*`), but rather as "dev" followed by a dash and then your package name in lowercase, like this: 
+
+```
+"require": {
+    "my-namespace/package-1": "dev-my-package-1",
+}
+```
+
+##### Note 3
 
 The url path is relative to the laravel/composer.json file. Thus the above example assumes your `packages` dir is a *sibling* of your `laravel` dir and a *child* of your application dir:
 
@@ -102,8 +118,9 @@ C:\
 1. Copy/download the laravel-package-template repository in to your folder: https://github.com/railroadmedia/laravel-package-template 
 1. Change composer.json to fit your needs
 1. Setup your service provider
-1. Run: composer install inside your package folder
-    * You should see a message that mentions symlinking your local package development directory (the one that you just made)
+1. Run *composer install* inside your package folder (if nothing happens you may need to run *composer update*)
+    * You should see a message that mentions symlinking your local package development directory (the one that you just made) like this: `  - Installing my-namespace/my-package-1 (dev-my-package-1): Symlinking from ../packages/my-namespace/my-package`
+`
 
 ### In your main applications' config/app.php file add your package's...
 
