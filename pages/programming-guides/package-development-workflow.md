@@ -11,27 +11,36 @@ Packages should be totally independent of your main application. They should be 
 ## Setting Up the Folders & Files
 
 ### Folder Structure
-1. If not already created, create a packages folder outside the laravel/your-application folder
-1. For railroad its (C:\web-development-environment\packages)
-1. Inside the packages folder create your package folder
-1. The tree looks like this
+
+1. If not already created, create a packages folder in your application folder
+1. For Drumeo its (C:\web-development-environment\drumeo\packages\
+1. Inside the packages folder create your 
+    1. namespace directory if it does not yet exist (ex: "my-namespace/")
+    1. package folder in that namespace directory (ex: "my-namespace/package-foo")
+
+The tree looks like this:
 
 ```text
---- my-app
---- packages
------- my-namespace
---------- my-package-1
------------- composer.json
------------- other package files...
---------- my-package-2
------------- composer.json
------------- other package files...
------- my-other-namespace
---------- my-package-3
------------- composer.json
------------- other package files...
------- etc...
+C:\
+---web-wordspace
+------ my-app
+------ packages
+--------- my-namespace
+------------ my-package-1
+--------------- composer.json
+--------------- other package files...
+------------ my-package-2
+--------------- composer.json
+--------------- other package files...
+--------- my-other-namespace
+------------ my-package-3
+--------------- composer.json
+--------------- other package files...
+--------- etc...
 ```
+
+You cannot create the packages folder directly in the web-applications folder unless you have LAMP installed on your machine. You will need to run composer in that directory, and the best way to do that is via the docker workspace container.
+
 
 ### Using the Packages in Your Application
 1. In your main laravel applications composer.json add your repositories like so:
@@ -64,16 +73,34 @@ Packages should be totally independent of your main application. They should be 
 ```
 
 ## Cloning the Template
+
 1. Copy/download the laravel-package-template repository in to your folder: https://github.com/railroadmedia/laravel-package-template 
 1. Change composer.json to fit your needs
 1. Setup your service provider
 1. Run: composer install inside your package folder
-1. Add your packages service provider to your main applications config/app.php
+
+### In your main applications' config/app.php file add your package's...
+
+For Drumeo as of June 2017, this is: *C:\web-development-environment\drumeo\laravel\config\app.php*
+
+1. add service provider
+
 ```php
 'providers' => [
     // ...
     MyNamespace/MyPackageName/Providers/MyProvider::class,
 };
+```
 
+2. Add your package('s namespace and "src" directory) to the psr-4 section of "autoload":
+
+```php
+"autoload": {
+    //...
+    "psr-4": {
+        //...
+        "Railroad\\SixtwentyPracticePackage\\Providers\\": "src"
+    },
+}
 ```
 **Start developing!**
