@@ -144,4 +144,28 @@ C:\
 }
 ```
 
+## A "*gotcha*" to watch out for when writing tests
+
+Set PHPStorm's PHPUnit settings to run the tests in your package, **not** the tests in your laravel application.
+
+You likely have these settings for your regular development:
+
+1. "PHPUnit Library" → "path to script": `/var/www/laravel/vendor/autoload.php`
+2. "Test Runner" → "Default configuration file": `/var/www/laravel/phpunit.xml`
+
+![phpstorm phpunit interpreter settings](/raildocs/images/package-development-workflow/phpstorm-phpunit-interpreter-settings.gif) 
+
+Change them accordingly.
+
+### Example
+
+For the "railroad\intercomeo" package, for example:
+
+1. "PHPUnit Library" → "path to script": `/var/www/packages/railroad/intercomeo/vendor/autoload.php`
+2. "Test Runner" → "Default configuration file": `/var/www/packages/railroad/intercomeo/phpunit.xml`
+
+![phpstorm phpunit interpreter settings for package](/raildocs/images/package-development-workflow/phpstorm-phpunit-interpreter-settings-for-package.gif)
+
+---------------------------------------------------------------
+
 **Start developing!**
