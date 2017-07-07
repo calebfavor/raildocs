@@ -93,6 +93,7 @@ The url path is relative to the laravel/composer.json file. Thus the above examp
 C:\
 ---web-wordspace
 ------ my-app
+--------- laravel
 --------- packages
 ------------ my-namespace
 --------------- my-package-1
@@ -105,6 +106,7 @@ However, if your `packages` dir is a **sibling** of your application dir...
 C:\
 ---web-wordspace
 ------ my-app
+--------- laravel
 ------ packages
 --------- my-namespace
 ------------ my-package-1
@@ -142,6 +144,26 @@ C:\
         "MyNamespace\\MyPackageName\\": "src"
     },
 }
+```
+
+**Warning**: this can troll you.
+
+For our current Drumeo set up (with the "laravel" dir a *child* of the root dir), we need to traverse to the "/packages"
+ dir relative to "/laravel/composer.json".
+
+ ```php
+ "autoload": {
+     "psr-4": {
+         "MyNamespace\\MyPackageName\\": "../packages/organization-name-foo/package-name-bar/src"
+     },
+ }
+ ```
+
+Failure to do this will result in a error like this: 
+
+```
+[Symfony\Component\Debug\Exception\FatalThrowableError]                    
+Class 'Railroad\Intercomeo\Providers\IntercomeoServiceProvider' not found 
 ```
 
 ## A "*gotcha*" to watch out for when writing tests
