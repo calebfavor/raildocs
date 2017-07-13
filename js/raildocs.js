@@ -101,7 +101,7 @@ $(function () {
         this.title = title;
         this.depth = depth;
         this.subLevels = [];
-        this.markdownHtml = '';
+        this.mdHtml = '';
         this.subLevelContainerElement = undefined;
 
         this.find = function (title) {
@@ -139,6 +139,7 @@ $(function () {
         for (var level1Title in tree) {
             if (tree.hasOwnProperty(level1Title)) {
 
+                // Level 1
                 var level1Element;
 
                 if (level1Title.slice(0, 8) === 'splitter') {
@@ -169,6 +170,7 @@ $(function () {
         for (var level2Title in level1Tree) {
             if (level1Tree.hasOwnProperty(level2Title)) {
 
+                // Level 2
                 var level2Element;
 
                 level2Element = level2LiTemplate.clone();
@@ -179,47 +181,46 @@ $(function () {
                 var level = new Level(level2Title, 2);
                 level.subLevelContainerElement = level2Element.find('.level-3-ul');
 
-                baseLevel.find(level1Title).subLevels.push(level)
+                baseLevel.find(level1Title).subLevels.push(level);
+
             }
         }
-
-        console.log(baseLevel);
     }
 
     function buildLevel3List(level1Title, level2Title) {
+        var level3LiTemplate = $('#html-templates .level-3-li-template').clone();
+
         var parentLevel = baseLevel
             .find(level1Title)
             .find(level2Title);
-
-        var level3LiTemplate = $('#html-templates .level-3-li-template').clone();
 
         var level2Tree = tree[level1Title][level2Title];
 
         for (var level3Title in level2Tree) {
             if (level2Tree.hasOwnProperty(level3Title)) {
-                (function () {
-                    var mdFile = level2Tree[level3Title];
 
-                    var level3Element = level3LiTemplate.clone();
+                // Level 3
+                var level3Element = level3LiTemplate.clone();
 
-                    level3Element.find('.level-3-title').text(level3Title).attr('data-title', level3Title);
+                level3Element.find('.level-3-title').text(level3Title).attr('data-title', level3Title);
 
-                    var level = new Level(level3Title, 3);
-                    level.subLevelContainerElement = level3Element.find('.level-4-ul');
+                parentLevel.subLevelContainerElement.append(level3Element);
 
-                    parentLevel.subLevels.push(level);
-                })();
+                var level = new Level(level3Title, 3);
+                level.subLevelContainerElement = level3Element.find('.level-4-ul');
+
+                parentLevel.subLevels.push(level);
             }
         }
     }
 
-    function buildLevel4List(level1Title, level2Title, level3Title) {
+    function buildLevel4List(level1Title, level2Title, level3Title, async) {
+        if (async === undefined) {
+            async = false;
+        }
+
         var level4LiTemplate = $('#html-templates .level-4-li-template').clone();
         var level4TitleTemplate = $('#html-templates .level-4-title-template').clone();
-
-        var ajaxCallsComplete = 0;
-        var asyncDone = false;
-        var mdHtml;
 
         var parentLevel = baseLevel
             .find(level1Title)
@@ -228,66 +229,35 @@ $(function () {
 
         var mdFile = tree[level1Title][level2Title][level3Title];
 
-        console.log(mdFile);
-        console.log(parentLevel);
-
         $.ajax({
             type: 'GET', url: 'pages/' + mdFile,
+            async: async,
             success: function (html) {
-                mdHtml = converter.makeHtml(html);
+                var mdHtml = converter.makeHtml(html);
 
-                if (mdHtml ===
-                    undefined ||
-                    mdHtml ===
-                    'undefined' ||
-                    typeof mdHtml !==
-                    'string') {
-                    return;
-                }
+                parentLevel.mdHtml += mdHtml;
 
                 var mdElement = $('<div>' + mdHtml + '</div>');
 
                 mdElement.find('h1').each(function (index, h1Element) {
+
+                    // Level 4
                     var level4Element = level4LiTemplate.clone();
                     var level4TitleElement = level4TitleTemplate.clone();
                     var level4Title = $(h1Element).text();
 
-                    level4TitleElement.text($(h1Element).text())
-                        .attr('data-title', $(h1Element).text());
+                    level4TitleElement.text(level4Title)
+                        .attr('data-title', level4Title);
+                    level4Element.append(level4TitleElement);
 
-                    parentLevel.subLevelContainerElement.append(level4TitleElement);
-                    level3Element.find('.level-4-ul').append(level4Element);
+                    parentLevel.subLevelContainerElement.append(level4Element);
+
+                    var level = new Level(level4Title, 4);
+
+                    parentLevel.subLevels.push(level);
                 });
-
-                ajaxCallsComplete++;
-
-                if (ajaxCallsComplete === Object.keys(tree).length) {
-                    asyncDone = true;
-                }
             }
         });
-
-        (function () {
-            var interval = setInterval(function () {
-                if (asyncDone) {
-                    $('#level-2-ul').show();
-
-                    var htmlString = '<div class="md-file-contents">' + mdsHtml + '</div>';
-
-                    $('.content-container', frames['md-iframe'].document).append($(htmlString));
-
-                    document.getElementById('md-iframe')
-                        .contentWindow
-                        .Prism
-                        .highlightAll(true, function () {
-                        });
-
-                    setupLevel2ClickEvents();
-
-                    clearInterval(interval);
-                }
-            }, 10);
-        })();
     }
 
     function render(level1Name, level2Name, level3name, level4TitleName) {
