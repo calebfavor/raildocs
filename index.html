@@ -6,12 +6,14 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="css/bootstrap-flex-grid.min.css">
+    <link rel="stylesheet" href="css/tether.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/raildocs.css">
-    <link rel="stylesheet" href="css/github-markdown.css">
     <link rel="stylesheet" href="css/prism.css">
 
     <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/showdown.min.js"></script>
     <script src="js/prism.js"></script>
     <script src="js/raildocs.js"></script>
@@ -21,321 +23,73 @@
 <div class="container-fluid main-container">
     <div class="row">
         <div class="col-md-12">
-            <h1 style="color: #ccc; line-height: 40px; margin: 0;"
-                title="Technical documentation for Railroad Media Inc.">
-                RailDocs
-            </h1>
-            <p style="color: #ccc; margin: 0; padding: 0;">Railroad Developer Documentation</p>
+            <h1>RailDocs</h1>
+            <p>Railroad Developer Documentation</p>
         </div>
     </div>
 
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-md-3">
-            <div class="sidebar-container">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Home / Doc Guidelines
-                        </span>
+    <div class="row">
+        <div class="col-md-12 level-1-nav-container">
 
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="rules-and-guidelines/rules-and-guidelines.md">
-                                    Rules & Guidelines
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="rules-and-guidelines/syntax.md">
-                                    Syntax Reference
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="rules-and-guidelines/creating-new-pages.md">
-                                    How to Create New Pages & Categories
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="rules-and-guidelines/pushing-changes.md">
-                                    Pushing Doc Changes
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
+            <ul id="level-1-ul" class="nav nav-tabs">
 
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            How to Deploy
-                        </span>
+            </ul>
 
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="deploying/deploying-drumeo.md">
-                                    Drumeo
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="deploying/deploying-pianote.md">
-                                    Pianote
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="deploying/deploying-drumeo-forums.md">
-                                    Drumeo Forums
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="deploying/deploying-misc-sites.md">
-                                    Misc Sites
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Production Emergency Procedure
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="production-emergency-procedure/production-server-down.md">
-                                    Production Server Down/Offline
-                                </span>
-
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="production-emergency-procedure/infusionsoft-api-down.md">
-                                    Infusionsoft API Down/Offline
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Development Environments
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/getting-started.md">
-                                    Getting Started / Pre Setup
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/pianote.md">
-                                    Pianote Setup
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="development-environments/drumeo.md">
-                                    Drumeo Setup
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/misc-sites.md">
-                                    Static/Misc Sites Setup
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/helper-links-and-commands.md">
-                                    Helper Links & Commands
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/pulling-production-databases.md">
-                                    Pulling Production Databases
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="development-environments/php-debugging.md">
-                                    PHPStorm Debugging & PHPUnit
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Programming Tutorials
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="programming-guides/package-development-workflow.md">
-                                    Package Development Workflow
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Drumeo Management
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="drumeo-management/updating-wordpress.md">
-                                    Updating Wordpress
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Pianote Asset Management
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="pianote-asset-management/css-js.md">
-                                    CSS/JS
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            PHPStorm
-                        </span>
-
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="php-storm/find-and-replace.md">
-                                    Advanced Find & Replace
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            DevOps / Systems Administration
-                        </span>
-                        <ul class="nav nav-pills nav-stacked">
-
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="dev-ops/creating-a-new-kubernetes-cluster.md">
-                                    Creating A Kubernetes Cluster
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="dev-ops/connecting-to-existing-kubernetes-cluster.md">
-                                    Connecting To Kubernetes Cluster
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="dev-ops/elk-stack.md">
-                                    Using Our ELK Stack
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="dev-ops/setting-up-a-aws-vpc.md">
-                                    Setting Up A AWS VPC
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="dev-ops/aws-ebs-cron-jobs.md">
-                                    AWS EBS Cron Jobs
-                                </span>
-                            </li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Pianote - "How Do I?"
-                        </span>
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="pianote-send-email.md">
-                                    Send Email
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="renewals.md">
-                                    Renewals
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Documentation for Non-Developers
-                        </span>
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link" data-file="how-to-report-bugs.md">
-                                    How to Report Bugs
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Misc
-                        </span>
-                        <ul class="nav nav-pills nav-stacked">
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="misc/tampermonkey-differentiate-production.md">
-                                    Use Tampermonkey to Differentiate Production Sites
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="misc/binding-hardcoded-values-to-an-originating-point.md">
-                                    Binding hardcoded values to an originating point
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <span class="menu-header">
-                            Drumeo JSON API Documentation
-                        </span>
-                        <ul class="nav nav-pills nav-stacked">
-
-                            <li class="nav-item">
-                                <span class="md-link nav-link"
-                                      data-file="drumeo-json-api-docs/lesson-wordpress-groups.md">
-                                    LessonWordpressGroups
-                                </span>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
         </div>
-        <div class="col-md-9">
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 left-nav-container">
+
+            <ul id="level-2-ul">
+
+            </ul>
+        </div>
+
+        <div class="col-md-9 right-content-container">
             <div class="md-container">
+                <iframe src="md-content-iframe.html" class="md-iframe">
 
+                </iframe>
             </div>
         </div>
     </div>
+</div>
+
+<div id="html-templates" style="display: none;">
+    <li class="nav-item level-1-li-template">
+        <a href="#" class="nav-link level-1-title-template">Documentation</a>
+    </li>
+
+    <li class="level-2-li-template">
+        <a href="#" class="level-2-title">
+            Title
+        </a>
+
+        <ul class="level-3-ul">
+
+        </ul>
+    </li>
+
+    <li class="level-3-li-template">
+        <a href="#" class="level-3-title">
+            Rules & Guidelines
+        </a>
+
+        <ul class="level-4-ul">
+
+        </ul>
+    </li>
+
+    <li class="level-4-li-template">
+
+    </li>
+
+    <a href="#" class="level-4-title-template">
+        My Header 1
+    </a>
+
+    <li class="nav-divider li-divider-template"></li>
 </div>
 
 </body>
