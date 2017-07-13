@@ -19,3 +19,7 @@
     width: 1px;
     background-color: #ddd;
 }
+
+.md-file-contents {
+    /*display: none;*/
+}
