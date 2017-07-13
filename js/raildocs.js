@@ -159,12 +159,17 @@ $(function () {
     }
 
     function buildLevel3Tree(tree, level2Element) {
+        $('#level-2-ul').hide();
+
         var level3LiTemplate = $('#html-templates .level-3-li-template').clone();
         var level4LiTemplate = $('#html-templates .level-4-li-template').clone();
         var level4TitleTemplate = $('#html-templates .level-4-title-template').clone();
 
         var mdHtml;
+        var mdsHtml;
         var mdFilesHtml = {};
+        var ajaxCallsComplete = 0;
+        var asyncDone = false;
 
         for (var level3Title in tree) {
             if (tree.hasOwnProperty(level3Title)) {
@@ -181,6 +186,12 @@ $(function () {
                         success: function (html) {
                             mdHtml = converter.makeHtml(html);
 
+                            if (mdHtml === undefined) {
+                                return;
+                            }
+
+                            mdsHtml += mdHtml;
+
                             mdFilesHtml[mdFile] = mdHtml;
 
                             var mdElement = $('<div>' + mdHtml + '</div>');
@@ -194,12 +205,49 @@ $(function () {
                                 level4Element.append(level4TitleElement);
                                 level3Element.find('.level-4-ul').append(level4Element);
                             });
+
+                            ajaxCallsComplete++;
+
+                            if (ajaxCallsComplete === Object.keys(tree).length) {
+                                asyncDone = true;
+                            }
                         }
                     });
                 })();
             }
         }
+
+        (function () {
+            var interval = setInterval(function () {
+                if (asyncDone) {
+                    $('#level-2-ul').show();
+
+                    var htmlString = '<div>' + mdsHtml + '</div>';
+
+                    $('.content-container', frames['md-iframe'].document).empty().append($(htmlString));
+
+                    document.getElementById('md-iframe')
+                        .contentWindow
+                        .Prism
+                        .highlightAll(true, function () {
+                        });
+
+                    clearInterval(interval);
+                }
+            }, 10);
+        })();
     }
+
+    var iframe = $('#md-iframe');
+
+    setInterval(function (event) {
+        if (iframe.length === 0) {
+            return;
+        }
+
+        iframe.height($(window).height() - iframe.offset().top - 10);
+
+    }, 50);
 
     var mdContainer = $('.md-container');
 
