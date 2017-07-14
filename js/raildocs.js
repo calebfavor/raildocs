@@ -118,18 +118,89 @@ $(function () {
     }
 
     var baseLevel = new Level('base', 0);
+    var currentPosition = [];
+    var currentAjaxCount = 0;
 
     var converter = new showdown.Converter();
     converter.setFlavor('github');
 
     buildLevel1List();
-    buildLevel2List('Environments, Deployment, & Sysops');
-    buildLevel3List('Environments, Deployment, & Sysops', 'Local Development Environments');
-    buildLevel4List(
-        'Environments, Deployment, & Sysops',
-        'Local Development Environments',
-        'Getting Started / Pre Setup'
-    );
+
+    $('.level-1-title-template').click(function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        currentPosition[0] = $(this).data('title');
+
+        $('.level-1-title-template').removeClass('active');
+        $(this).addClass('active');
+
+        render(currentPosition[0]);
+
+        return false;
+    });
+
+    $('body').on('click', '.level-2-title', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        currentPosition[1] = $(this).data('title');
+        render(currentPosition[0], currentPosition[1]);
+
+        $('.level-2-title').removeClass('active');
+        $(this).addClass('active');
+
+        return false;
+    });
+
+    $('body').on('click', '.level-3-title', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        currentPosition[2] = $(this).data('title');
+
+        $('.level-3-title').removeClass('active');
+        $(this).addClass('active')
+            .parent()
+            .find('.collapse-button')
+            .trigger('click');
+
+        var index = $(this).parent().parent().find('.level-3-title').index(this);
+
+        console.log(index);
+
+        var newPosition = $('body', frames['md-iframe'].document)
+            .find('.level-3-splitter-template')
+            .eq(index)
+            .offset().top;
+
+        $('body', frames['md-iframe'].document).scrollTop(newPosition);
+
+        return false;
+    });
+
+    $('body').on('click', '.collapse-button', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        var listElement = $(this).parent().find('ul');
+
+        if (listElement.is(':visible')) {
+            listElement.hide();
+            $(this).text('+');
+        } else {
+            listElement.show();
+            $(this).text('-');
+        }
+    });
+
+    // buildLevel2List('Documentation');
+    // buildLevel3List('Documentation', 'Guidelines');
+    // buildLevel4List(
+    //     'Environments, Deployment, & Sysops',
+    //     'Local Development Environments',
+    //     'Getting Started / Pre Setup'
+    // );
 
     function buildLevel1List() {
         var level1Ul = $('#level-1-ul');
@@ -229,6 +300,8 @@ $(function () {
 
         var mdFile = tree[level1Title][level2Title][level3Title];
 
+        currentAjaxCount++;
+
         $.ajax({
             type: 'GET', url: 'pages/' + mdFile,
             async: async,
@@ -256,94 +329,85 @@ $(function () {
 
                     parentLevel.subLevels.push(level);
                 });
+
+                currentAjaxCount--;
             }
         });
     }
 
-    function render(level1Name, level2Name, level3name, level4TitleName) {
-        if (level2Name === undefined) {
+    function render(level1Title, level2Title, level3Title, level4Title) {
+        currentAjaxCount = 0;
 
+        if (level2Title === undefined) {
+            $('#level-2-ul').empty();
+
+            buildLevel2List(level1Title);
+
+            for (var level2Title in tree[level1Title]) {
+                buildLevel3List(level1Title, level2Title);
+
+                for (var level3Title in tree[level1Title][level2Title]) {
+                    buildLevel4List(level1Title, level2Title, level3Title, true);
+                }
+            }
+
+            // render first by default
+            level2Title = Object.keys(tree[level1Title])[0];
         }
+
+        currentPosition[1] = level2Title;
+
+        var interval = setInterval(function () {
+            if (currentAjaxCount === 0) {
+                clearInterval(interval);
+
+                var mdsHtml = '';
+                var levelsToRender = baseLevel.find(level1Title).find(level2Title).subLevels;
+
+                console.log('hit!');
+
+                $(baseLevel.find(level1Title).find(level2Title).subLevelContainerElement)
+                    .parent()
+                    .find('.collapse-button')
+                    .trigger('click');
+
+                $(baseLevel.find(level1Title).find(level2Title).subLevelContainerElement)
+                    .parent().find('.level-title').first().addClass('active');
+
+                // collect all the md html
+                for (var level in levelsToRender) {
+                    var splitter = $('#html-templates .level-3-splitter-template').clone();
+                    console.log(splitter);
+                    splitter.attr('data-title', levelsToRender[level].title);
+
+                    mdsHtml += splitter[0].outerHTML + levelsToRender[level].mdHtml;
+                }
+
+                var htmlString = '<div>' + mdsHtml + '</div>';
+
+                $('.content-container', frames['md-iframe'].document).empty().append($(htmlString));
+
+                document.getElementById('md-iframe')
+                    .contentWindow
+                    .Prism
+                    .highlightAll(true, function () {
+                    });
+
+                console.log(currentPosition);
+            }
+        }, 50);
     }
 
-    function setupLevel1ClickEvents() {
-        $('.level-1-title-template').click(function (event) {
-            event.stopPropagation();
-            event.preventDefault();
-
-            $('#level-2-ul').empty();
-
-            buildLevel2Tree(level2Tree[$(this).text()]);
-
-            return false;
-        });
-    }
-
-    function setupLevel2ClickEvents() {
-        console.log(contentTree);
-
-        $('.level-2-title-template').click(function (event) {
-            event.stopPropagation();
-            event.preventDefault();
-
-            $('#level-2-ul').empty();
-
-            buildLevel2Tree(level2Tree[$(this).text()]);
-
-            return false;
-        });
-    }
-
-    var iframe = $('#md-iframe');
+    var iFrame = $('#md-iframe');
 
     setInterval(function (event) {
-        if (iframe.length === 0) {
+        if (iFrame.length === 0) {
             return;
         }
 
-        iframe.height($(window).height() - iframe.offset().top - 10);
+        iFrame.height($(window).height() - iFrame.offset().top - 10);
 
     }, 50);
-
-    var mdContainer = $('.md-container');
-
-    $('.md-link').click(function () {
-        var file = $(this).data('file');
-
-        var paramString = $.param({'current-md': file});
-
-        if (history.pushState) {
-            var currentUrl = [location.protocol, '//', location.host, location.pathname].join('');
-
-            window.history.pushState({path: currentUrl + "?" + paramString}, '', currentUrl +
-                "?" +
-                paramString);
-        }
-
-        mdContainer.fadeOut(60, function () {
-            $.ajax({
-                type: 'GET', url: 'pages/' + file, success: function (html) {
-                    mdContainer.html(converter.makeHtml(html));
-
-                    Prism.highlightAll(true, function () {
-                    });
-
-                    $("html, body").animate({scrollTop: 0}, 150);
-
-                    mdContainer.fadeIn(60);
-                }
-            });
-        });
-
-        $('.md-link').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    if (getParameterByName('current-md') != null) {
-        $('.md-link[data-file="' + getParameterByName('current-md') + '"]').trigger('click');
-    } else {
-        $('.md-link').first().trigger('click');
-    }
 
     function getParameterByName(name, url) {
         if (!url) {

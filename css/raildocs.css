@@ -23,3 +23,39 @@
 .md-file-contents {
     /*display: none;*/
 }
+
+.collapse-button {
+    font-weight: bold;
+    font-size: 14pt;
+    margin-right: 5px;
+}
+
+.collapse-button:hover {
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.collapsing {
+    -webkit-transition: height 0s ease;
+    -o-transition: height 0s ease;
+    transition: height 0s ease;
+}
+
+.hide {
+    display: none;
+}
+
+.level-title:hover {
+    cursor: pointer;
+}
+
+.level-title.active {
+    font-weight: bold;
+}
+
+.level-1-title-template:hover {
+    cursor: pointer;
+}
