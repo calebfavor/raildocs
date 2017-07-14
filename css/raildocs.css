@@ -59,3 +59,7 @@ ul {
 .level-1-title-template:hover {
     cursor: pointer;
 }
+
+.level-3-splitter-template {
+    font-size: 40pt;
+}

@@ -130,12 +130,12 @@ $(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        currentPosition[0] = $(this).data('title');
-
         $('.level-1-title-template').removeClass('active');
         $(this).addClass('active');
 
-        render(currentPosition[0]);
+        currentPosition[0] = $(this).data('title');
+        currentPosition[1] = undefined;
+        render();
 
         return false;
     });
@@ -144,11 +144,13 @@ $(function () {
         event.stopPropagation();
         event.preventDefault();
 
-        currentPosition[1] = $(this).data('title');
-        render(currentPosition[0], currentPosition[1]);
-
         $('.level-2-title').removeClass('active');
         $(this).addClass('active');
+
+        currentPosition[1] = $(this).data('title');
+        currentPosition[2] = undefined;
+
+        render();
 
         return false;
     });
@@ -158,6 +160,7 @@ $(function () {
         event.preventDefault();
 
         currentPosition[2] = $(this).data('title');
+        currentPosition[3] = undefined;
 
         $('.level-3-title').removeClass('active');
         $(this).addClass('active')
@@ -171,6 +174,29 @@ $(function () {
 
         var newPosition = $('body', frames['md-iframe'].document)
             .find('.level-3-splitter-template')
+            .eq(index)
+            .offset().top;
+
+        $('body', frames['md-iframe'].document).scrollTop(newPosition);
+
+        return false;
+    });
+
+    $('body').on('click', '.level-4-title-template', function (event) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        currentPosition[3] = $(this).data('title');
+
+        $('.level-4-title-template').removeClass('active');
+        $(this).addClass('active');
+
+        var index = $(this).parent().parent().parent().parent().find('.level-4-title-template').index(this);
+
+        console.log(index);
+
+        var newPosition = $('body', frames['md-iframe'].document)
+            .find('h1')
             .eq(index)
             .offset().top;
 
@@ -193,14 +219,6 @@ $(function () {
             $(this).text('-');
         }
     });
-
-    // buildLevel2List('Documentation');
-    // buildLevel3List('Documentation', 'Guidelines');
-    // buildLevel4List(
-    //     'Environments, Deployment, & Sysops',
-    //     'Local Development Environments',
-    //     'Getting Started / Pre Setup'
-    // );
 
     function buildLevel1List() {
         var level1Ul = $('#level-1-ul');
@@ -335,18 +353,23 @@ $(function () {
         });
     }
 
-    function render(level1Title, level2Title, level3Title, level4Title) {
+    function render() {
         currentAjaxCount = 0;
+
+        var level1Title = currentPosition[0];
+        var level2Title = currentPosition[1];
+        var level3Title = currentPosition[2];
+        var level4Title = currentPosition[3];
 
         if (level2Title === undefined) {
             $('#level-2-ul').empty();
 
             buildLevel2List(level1Title);
 
-            for (var level2Title in tree[level1Title]) {
+            for (level2Title in tree[level1Title]) {
                 buildLevel3List(level1Title, level2Title);
 
-                for (var level3Title in tree[level1Title][level2Title]) {
+                for (level3Title in tree[level1Title][level2Title]) {
                     buildLevel4List(level1Title, level2Title, level3Title, true);
                 }
             }
@@ -378,7 +401,8 @@ $(function () {
                 for (var level in levelsToRender) {
                     var splitter = $('#html-templates .level-3-splitter-template').clone();
                     console.log(splitter);
-                    splitter.attr('data-title', levelsToRender[level].title);
+                    splitter.attr('data-title', levelsToRender[level].title)
+                        .text(levelsToRender[level].title);
 
                     mdsHtml += splitter[0].outerHTML + levelsToRender[level].mdHtml;
                 }
