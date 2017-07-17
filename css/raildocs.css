@@ -56,10 +56,14 @@ ul {
     font-weight: bold;
 }
 
-.level-1-title-template:hover {
+.level-3-splitter-template {
+    font-size: 40pt;
+}
+
+.tab-level-title:hover {
     cursor: pointer;
 }
 
-.level-3-splitter-template {
-    font-size: 40pt;
+.tab-level-title.active {
+    font-weight: bold;
 }
