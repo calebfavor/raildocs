@@ -16,9 +16,16 @@ $(function () {
         };
 
         this.onClick = function (event) {
-            event.preventDefault();
-            event.stopPropagation();
+            self.select();
+        };
 
+        this.select = function () {
+            currentTab = self;
+
+            $('.tab-level-title').removeClass('active');
+            titleElement.addClass('active');
+
+            // load in primary categories
             childrenContainerElement.empty();
 
             for (var primaryCategoryIndex in primaryCategories) {
@@ -29,18 +36,11 @@ $(function () {
                 }
             }
 
-            // if no tab is already selected, select the first one by default
-            currentTab = self;
-
             if (currentPrimaryCategory === undefined) {
                 primaryCategories[0].select();
             } else {
                 currentPrimaryCategory.select();
             }
-
-            // make the clicked tab active
-            $('.tab-level-title').removeClass('active');
-            titleElement.addClass('active');
         };
     };
 
@@ -86,7 +86,7 @@ $(function () {
             $('.content-container', frames['md-iframe'].document).empty().append($(mdHtml));
         };
 
-        this.select = function (event) {
+        this.select = function () {
             childrenContainerElement.show();
 
             $('.primary-category-list-title').removeClass('active');
@@ -94,16 +94,28 @@ $(function () {
 
             self.displayMarkdown();
 
-            currentPrimaryCategory = self;
-
-            if ($(event.target).hasClass('primary-category-list-title')) {
+            if (currentSubCategory === undefined) {
                 subCategories[0].select();
+            } else {
+                currentSubCategory.select();
             }
         };
 
         this.onClick = function (event) {
-            event.stopPropagation();
-            self.select(event);
+            currentPrimaryCategory = self;
+
+            if ($(event.target).hasClass('primary-category-list-title')) {
+                currentHeader = undefined;
+                currentSubCategory = undefined;
+            }
+
+            currentPrimaryCategory.select();
+
+            if (currentSubCategory === undefined) {
+                subCategories[0].select();
+            } else {
+                currentSubCategory.select();
+            }
         };
 
     };
@@ -113,6 +125,7 @@ $(function () {
         var element = $('#html-templates .sub-category-list-template').clone();
         var titleElement = element.find('.sub-category-list-title').first();
         var childrenContainerElement = element.find('.sub-category-list-ul').first();
+        var headers = [];
 
         var converter = new showdown.Converter();
         converter.setFlavor('github');
@@ -130,10 +143,11 @@ $(function () {
             childrenContainerElement.children().detach();
 
             this.combinedMarkdownHtml = '';
+            headers = [];
 
             $.ajax({
                 type: 'GET', url: 'pages/' + mdFile,
-                // async: false,
+                async: false,
                 success: function (html) {
                     ajaxCount--;
 
@@ -148,6 +162,8 @@ $(function () {
                         var header = new Header(headerTitle);
 
                         header.render(childrenContainerElement);
+
+                        headers.push(header);
                     });
                 }
             });
@@ -155,7 +171,7 @@ $(function () {
             ajaxCount++;
         };
 
-        this.select = function (event) {
+        this.select = function () {
             var index = element
                 .closest('.primary-category-list-template')
                 .find('.sub-category-list-template')
@@ -166,21 +182,26 @@ $(function () {
                 .eq(index)
                 .offset().top;
 
-            if ($(event.target).hasClass('sub-category-list-title')) {
-                $('body', frames['md-iframe'].document).scrollTop(newPosition);
-            }
-
-            childrenContainerElement.show();
+            $('body', frames['md-iframe'].document).scrollTop(newPosition);
 
             $('.sub-category-list-title').removeClass('active');
             titleElement.addClass('active');
 
-            currentSubCategory = self;
+            childrenContainerElement.show();
+
+            if (currentHeader === undefined) {
+                headers[0].select();
+            } else {
+                currentHeader.select();
+            }
         };
 
         this.onClick = function (event) {
-            this.render();
-            self.select(event);
+            currentSubCategory = self;
+
+            if ($(event.target).hasClass('sub-category-list-title')) {
+                currentHeader = undefined;
+            }
         };
     };
 
@@ -196,30 +217,23 @@ $(function () {
         };
 
         this.onClick = function (event) {
-            var interval = setInterval(function () {
-                if (ajaxCount === 0) {
-                    var index = element
-                        .closest('.primary-category-list-template')
-                        .find('.title-list-template')
-                        .index(element);
-                    var newPosition = $('body', frames['md-iframe'].document)
-                        .find('h1')
-                        .eq(index)
-                        .offset().top;
+            currentHeader = self;
+        };
 
-                    console.log(index);
-                    console.log(newPosition);
+        this.select = function () {
+            var index = element
+                .closest('.primary-category-list-template')
+                .find('.title-list-template')
+                .index(element);
+            var newPosition = $('body', frames['md-iframe'].document)
+                .find('h1')
+                .eq(index)
+                .offset().top;
 
-                    $('body', frames['md-iframe'].document).scrollTop(newPosition);
+            $('body', frames['md-iframe'].document).scrollTop(newPosition);
 
-                    $('.title-list-title').removeClass('active');
-                    titleElement.addClass('active');
-
-                    currentHeader = self;
-
-                    clearInterval(interval);
-                }
-            }, 50);
+            $('.title-list-title').removeClass('active');
+            titleElement.addClass('active');
         };
 
         element.click(self.onClick);
@@ -268,6 +282,10 @@ $(function () {
             ]),
         ]),
     ];
+
+    function select(currentTab, currentPrimaryCategory, currentSubCategory, currentHeader) {
+        currentTab.select();
+    }
 
     var ajaxCount = 0;
 
