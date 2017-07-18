@@ -93,6 +93,13 @@ $(function () {
             }
 
             $('.content-container', frames['md-iframe'].document).empty().append($(mdHtml));
+
+            document.getElementById('md-iframe')
+                .contentWindow
+                .Prism
+                .highlightAll(true, function () {
+                });
+
         };
 
         this.select = function () {
