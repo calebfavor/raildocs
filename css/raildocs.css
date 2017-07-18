@@ -30,10 +30,6 @@
     margin-right: 5px;
 }
 
-.collapse-button:hover {
-    cursor: pointer;
-}
-
 ul {
     list-style-type: none;
 }
@@ -48,8 +44,9 @@ ul {
     display: none;
 }
 
-.level-title:hover {
+.list-title:hover {
     cursor: pointer;
+    color: brown;
 }
 
 .level-title.active {
