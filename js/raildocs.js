@@ -54,12 +54,17 @@ $(function () {
 
             containerElement.append(element);
 
-            childrenContainerElement.children().detach();
+            element.unbind('click.raildocs');
+            element.on('click.raildocs', self.onClick);
+
+            childrenContainerElement.find('.sub-category-list-template').detach();
 
             // render sub categories
             for (var subCategoryIndex in subCategories) {
                 if (subCategories.hasOwnProperty(subCategoryIndex)) {
                     var subCategory = subCategories[subCategoryIndex];
+
+                    console.log(subCategory);
 
                     subCategory.render(childrenContainerElement);
                 }
@@ -101,11 +106,8 @@ $(function () {
             event.stopPropagation();
             self.select();
 
-
-
         };
 
-        element.click(self.onClick);
     };
 
     var SubCategory = function (title, mdFile) {
@@ -123,6 +125,9 @@ $(function () {
             element.find('.sub-category-list-title').text(title).attr('data-title', title);
 
             containerElement.append(element);
+
+            element.unbind('click.raildocs');
+            element.on('click.raildocs', self.onClick);
 
             childrenContainerElement.children().detach();
 
@@ -161,8 +166,6 @@ $(function () {
             console.log('hit1');
             self.select();
         };
-
-        element.click(self.onClick);
     };
 
     var Header = function (title) {
@@ -177,10 +180,10 @@ $(function () {
         };
 
         this.onClick = function (event) {
-                var index = element
-                    .closest('.primary-category-list-template')
-                    .find('.title-list-template')
-                    .index(element);
+            var index = element
+                .closest('.primary-category-list-template')
+                .find('.title-list-template')
+                .index(element);
 
             var newPosition = $('body', frames['md-iframe'].document)
                 .find('h1')
