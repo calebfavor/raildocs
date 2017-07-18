@@ -1,4 +1,7 @@
 $(function () {
+    /*
+     Define Objects
+     */
     var Tab = function (title, primaryCategories) {
         var self = this;
         var element = $('#html-templates .tab-level-template').clone();
@@ -16,12 +19,19 @@ $(function () {
         };
 
         this.onClick = function (event) {
+            currentTab = self;
+            77
+
+            if ($(event.target).hasClass('tab-level-title')) {
+                currentPrimaryCategory = undefined;
+                currentSubCategory = undefined;
+                currentHeader = undefined;
+            }
+
             self.select();
         };
 
         this.select = function () {
-            currentTab = self;
-
             $('.tab-level-title').removeClass('active');
             titleElement.addClass('active');
 
@@ -34,12 +44,6 @@ $(function () {
 
                     primaryCategory.render(childrenContainerElement);
                 }
-            }
-
-            if ($(event.target).hasClass('tab-level-title')) {
-                currentPrimaryCategory = undefined;
-                currentSubCategory = undefined;
-                currentHeader = undefined;
             }
 
             if (currentPrimaryCategory === undefined) {
@@ -178,28 +182,34 @@ $(function () {
         };
 
         this.select = function () {
-            var index = element
-                .closest('.primary-category-list-template')
-                .find('.sub-category-list-template')
-                .index(element);
-
-            var newPosition = $('body', frames['md-iframe'].document)
-                .find('.sub-category-splitter')
-                .eq(index)
-                .offset().top;
-
-            $('body', frames['md-iframe'].document).scrollTop(newPosition);
-
             $('.sub-category-list-title').removeClass('active');
             titleElement.addClass('active');
 
             childrenContainerElement.show();
 
-            if (currentHeader === undefined) {
-                headers[0].select();
-            } else {
-                currentHeader.select();
-            }
+            var interval = setInterval(function () {
+                if (ajaxCount === 0) {
+                    var index = element
+                        .closest('.primary-category-list-template')
+                        .find('.sub-category-list-template')
+                        .index(element);
+
+                    var newPosition = $('body', frames['md-iframe'].document)
+                        .find('.sub-category-splitter')
+                        .eq(index)
+                        .offset().top;
+
+                    $('body', frames['md-iframe'].document).scrollTop(newPosition);
+
+                    if (currentHeader === undefined) {
+                        headers[0].select();
+                    } else {
+                        currentHeader.select();
+                    }
+
+                    clearInterval(interval);
+                }
+            }, 50);
         };
 
         this.onClick = function (event) {
@@ -251,6 +261,9 @@ $(function () {
         }
     };
 
+    /*
+     Master Tree
+     */
     var masterTree = [
         new Tab('Documentation', [
             new PrimaryCategory('Guidelines', [
@@ -310,10 +323,9 @@ $(function () {
 
     ];
 
-    function select(currentTab, currentPrimaryCategory, currentSubCategory, currentHeader) {
-        currentTab.select();
-    }
-
+    /*
+     App Entry Point
+     */
     var ajaxCount = 0;
 
     var currentTab;
@@ -329,6 +341,10 @@ $(function () {
             tab.render();
         }
     }
+
+    $('iframe').on('load', function () {
+        $('.tab-level-title').first().trigger('click.raildocs');
+    });
 
     // setup iFrame auto resizing
     setInterval(function (event) {
