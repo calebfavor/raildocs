@@ -67,3 +67,8 @@ ul {
 .tab-level-title.active {
     font-weight: bold;
 }
+
+span.active {
+    font-weight: bold;
+
+}
