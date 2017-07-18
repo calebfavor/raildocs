@@ -36,6 +36,12 @@ $(function () {
                 }
             }
 
+            if ($(event.target).hasClass('tab-level-title')) {
+                currentPrimaryCategory = undefined;
+                currentSubCategory = undefined;
+                currentHeader = undefined;
+            }
+
             if (currentPrimaryCategory === undefined) {
                 primaryCategories[0].select();
             } else {
@@ -239,6 +245,12 @@ $(function () {
         element.click(self.onClick);
     };
 
+    var TabSplitter = function () {
+        this.render = function () {
+            $('#level-1-ul').append($('#html-templates .tab-divider-template').clone());
+        }
+    };
+
     var masterTree = [
         new Tab('Documentation', [
             new PrimaryCategory('Guidelines', [
@@ -248,6 +260,7 @@ $(function () {
                 new SubCategory('Pushing Changes', 'pushing-changes.md'),
             ]),
         ]),
+        new TabSplitter(),
         new Tab('Environments, Deployment, & Sysops', [
             new PrimaryCategory('Local Development Environments', [
                 new SubCategory('Getting Started / Pre Setup', 'getting-started.md'),
@@ -281,6 +294,20 @@ $(function () {
                 new SubCategory('Advanced Find & Replace', 'find-and-replace.md'),
             ]),
         ]),
+        new Tab('Programming', [
+            new PrimaryCategory('Tutorials', [
+                new SubCategory('Package Development Workflow', 'package-development-workflow.md'),
+            ]),
+            new PrimaryCategory('Management', [
+                new SubCategory('Updating Drumeo Wordpress', 'updating-wordpress.md'),
+            ]),
+        ]),
+        new Tab('Front End', []),
+        new Tab('Misc Dev', []),
+        new TabSplitter(),
+        new Tab('Support', []),
+        new Tab('Accounting', []),
+
     ];
 
     function select(currentTab, currentPrimaryCategory, currentSubCategory, currentHeader) {
