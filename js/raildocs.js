@@ -6,12 +6,12 @@ $(function () {
         var self = this;
         var element = $('#html-templates .tab-level-template').clone();
         var titleElement = element.find('.tab-level-title').first();
-        var childrenContainerElement = $('#level-2-ul');
+        var childrenContainerElement = $('#primary-category-ul');
 
         this.render = function () {
             // set the title and add the element to the page
             titleElement.text(title).attr('data-title', title);
-            $('#level-1-ul').append(element);
+            $('#tab-ul').append(element);
 
             // setup events
             element.unbind('click.raildocs');
