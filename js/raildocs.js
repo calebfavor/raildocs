@@ -321,7 +321,12 @@ $(function () {
                 new SubCategory('Updating Drumeo Wordpress', 'updating-wordpress.md'),
             ]),
         ]),
-        new Tab('Front End', []),
+        new Tab('Front End', [
+            new PrimaryCategory('Grid', [
+                new SubCategory('Float Grid', 'front-end/float-grid.md'),
+                new SubCategory('Flex Grid', 'front-end/flex-grid.md')
+            ])
+        ]),
         new Tab('Misc Dev', []),
         new TabSplitter(),
         new Tab('Support', []),
