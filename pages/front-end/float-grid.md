@@ -1,17 +1,4 @@
-<script type="text/javascript">
-    function resizeIframe(iframe) {
-        iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
-      }
-      
-      iframeContainer = document.getElementsByTagName('iframe');
-      
-      console.log(iframeContainer);
-      window.onresize = function(){
-        for(i = 0; i < iframeContainer.length; i++){
-          resizeIframe(iframeContainer[i]);
-        }
-      }
-</script>
+<link rel="stylesheet" href="//dev.railworks.com/dist/compiled/app.css">
 
 # Rows
 
@@ -70,7 +57,68 @@ Here is a table showing how certain aspects of the grid behave on certain breakp
 
 Here's an example of a grid using classes for all breakpoints. .sm-6 means on smaller devices the columns will be 12/6 or 2 wide. md-4 means on medium devices the columns will be 12/4 or 3 wide. .lg-2 means the columns will be 12/2 or 6 wide.
 
-<iframe onload="resizeIframe(this)" onresize="resizeIframe(this)" src="html-samples/grid.html"></iframe>
+<div class="row" markdown="1">
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+    <div class="col sm-6 md-4 lg-2">
+        <span class="show-for-sm-only">sm-6</span>
+        <span class="show-for-md-only">md-4</span>
+        <span class="show-for-lg-only">lg-2</span>
+    </div>
+</div>
 
 # Visibility Classes
 
