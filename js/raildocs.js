@@ -20,7 +20,6 @@ $(function () {
 
         this.onClick = function (event) {
             currentTab = self;
-            77
 
             if ($(event.target).hasClass('tab-level-title')) {
                 currentPrimaryCategory = undefined;
