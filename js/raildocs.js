@@ -256,7 +256,7 @@ $(function () {
 
     var TabSplitter = function () {
         this.render = function () {
-            $('#level-1-ul').append($('#html-templates .tab-divider-template').clone());
+            $('#tab-ul').append($('#html-templates .tab-divider-template').clone());
         }
     };
 
