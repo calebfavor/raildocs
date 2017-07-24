@@ -178,7 +178,7 @@ Class 'Railroad\Intercomeo\Providers\IntercomeoServiceProvider' not found
 Change the dir path in settings:
 
 
-#### 1. `/phpunit.xml`
+#### 1. `phpunit.xml`
 
 */var/www/**laravel**/phpunit.xml*
 
@@ -187,7 +187,7 @@ Change the dir path in settings:
 */var/www/**packages/railroad/intercomeo**/phpunit.xml*
 
 
-#### 2. `/vendor/autoload.xml`
+#### 2. `vendor/autoload.xml`
 
 */var/www/**laravel**/vendor/autoload.xml*
 
