@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="//dev.railworks.com/dist/compiled/app.css">
 <style>
     .col {  height:50px;border:1px solid #d1d1d1;text-align:center;line-height:48px;  }
 </style>

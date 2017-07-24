@@ -79,7 +79,7 @@ span.active {
     color:#3e4651;
 }
 
-ul {
+.left-nav-container ul {
     list-style-type: none;
 }
 iframe {
@@ -108,4 +108,5 @@ iframe {
     background:#fff;
     border:none;
     color:#f1654c;
+    font-weight:400;
 }
