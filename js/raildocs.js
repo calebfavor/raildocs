@@ -327,7 +327,8 @@ $(function () {
                 new SubCategory('Flex Grid', 'front-end/flex-grid.md')
             ]),
             new PrimaryCategory('Components', [
-                new SubCategory('Buttons', 'front-end/buttons.md')
+                new SubCategory('Buttons', 'front-end/buttons.md'),
+                new SubCategory('Modal', 'front-end/modal.md')
             ])
         ]),
         new Tab('Misc Dev', []),

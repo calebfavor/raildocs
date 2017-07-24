@@ -213,24 +213,22 @@ The table below shows visibility of classes at the various breakpoints
 
 # Sass Variables
 
-**$fixedRowWidth** - Controls the size of a fixed row
+| Variable                           | Usage                                                                    |
+|------------------------------------|--------------------------------------------------------------------------|
+| **$fixedRowWidth**                 | Controls the size of a fixed row                                         |
+| **$gutterWidth**                   | Controls the size of gutters                                             |
+| **$tabletWidth**                   | Controls the md breakpoint                                               |
+| **$desktopWidth**                  | Controls the lg breakpoint                                               |
+| **$largeDesktopWidth**             | Controls a larger breakpoint if needed                                   |
 
-**$gutterWidth** - Controls the size of gutters
-
-**$tabletWidth** - Controls the md breakpoint
-
-**$desktopWidth** - Controls the lg breakpoint
-
-**$largeDesktopWidth** - Controls a larger breakpoint if needed, (not reflected in responsive classes)
 
 # Mixins
 
-**@include tablet {}** - Allows control of css at the tablet breakpoint
-
-**@include desktop {}** - Allows control of css at the desktop breakpoint
-
-**@include largeDesktop {}** - Allows control of css at the large desktop breakpoint
-
-**@include highDpi {}** - Allows control of css on high dpi devices (ex. loading a higher res background image for retina devices)
+| Mixin                              | Usage                                                                    |
+|------------------------------------|--------------------------------------------------------------------------|
+| **@include tablet {}**             | Allows control of css at the tablet breakpoint                           |
+| **@include desktop {}**            | Allows control of css at the desktop breakpoint                          |
+| **@include largeDesktop {}**       | Allows control of css at the large desktop breakpoint                    |
+| **@include highDpi {}**            | Allows control of css on high dpi devices (ex. loading a higher res background image for retina devices)|
 
 
