@@ -4,11 +4,14 @@
 
 This is primarily based on this article https://www.sitepoint.com/alternative-laravel-package-development-workflow/
 
-Packages should be totally independent of your main application. They should be individually tested and fully functional without any reliance on your app. Each package will have it own full laravel installation. However this guide shows you how to develop the package and test it inside your main application while still keeping the package separate. Using local composer repositories you can make changes to your package and have it instantly updated in your application instead of pushing to packagist and having to composer update in your application for every change. 
+Packages should be totally independent of your main application. They should be individually tested and fully functional without any reliance on your app. Each package will have it own full laravel installation. 
+
+However, this guide shows you how to develop the package and test it inside your main application while still keeping the package separate. Using local composer repositories you can make changes to your package and have it instantly updated in your application instead of pushing to *Packagist* and having to composer update in your application for every change. 
+
+
+## Setting Up the Folders & Files *for Developement*
 
 **NOTE: This is ONLY for development, in production your package should have a release and be on packagist. It should be pulled in in your main applications composer.json like a normal package.**
-
-## Setting Up the Folders & Files
 
 ### Folder Structure
 
@@ -166,7 +169,34 @@ Failure to do this will result in a error like this:
 Class 'Railroad\Intercomeo\Providers\IntercomeoServiceProvider' not found 
 ```
 
-## A "*gotcha*" to watch out for when writing tests
+
+## PHPStorm PHPUnit Testing Configuration
+
+
+### TLDR 
+
+Change the dir path in settings:
+
+
+#### 1. `/phpunit.xml`
+
+*/var/www/**laravel**/phpunit.xml*
+
+↓ becomes ↓
+
+*/var/www/**packages/railroad/intercomeo**/phpunit.xml*
+
+
+#### 2. `/vendor/autoload.xml`
+
+*/var/www/**laravel**/vendor/autoload.xml*
+
+↓ becomes ↓
+
+*/var/www/**packages/railroad/intercomeo**/vendor/autoload.xml* 
+
+
+### Details
 
 Set PHPStorm's PHPUnit settings to run the tests in your package, **not** the tests in your laravel application.
 
@@ -179,7 +209,7 @@ You likely have these settings for your regular development:
 
 Change them accordingly.
 
-### Example
+#### Example
 
 For the "railroad\intercomeo" package, for example:
 
