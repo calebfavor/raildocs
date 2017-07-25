@@ -1,4 +1,4 @@
-## Modal
+###### Modal
 
 # Basic Usage
 
@@ -15,7 +15,7 @@
     <button class="button" data-open-modal="defaultModal">Modal</button>
     
     <div id="defaultModal" class="modal">
-        <h1>This is a Default Modal</h1>
+        <p>This is a Default Modal</h1>
     </div>
 ```
 
@@ -39,11 +39,11 @@
     <button class="button" data-open-modal="smallModal">Small</button>
     
     <div id="largeModal" class="modal lg">
-        <h1>This is a Large Modal</h1>
+        <p>This is a Large Modal</h1>
     </div>
     
     <div id="smallModal" class="modal sm">
-        <h1>This is a Small Modal</h1>
+        <p>This is a Small Modal</h1>
     </div>
 ```
 
@@ -69,11 +69,11 @@
     <button class="button" data-open-modal="slideDownModal">Slide Down</button>
     
     <div id="slideUpModal" class="modal slide-up">
-        <h1>This Modal will slide up</h1>
+        <p>This Modal will slide up</h1>
     </div>
     
     <div id="slideDownModal" class="modal slide-down">
-        <h1>This Modal will slide down</h1>
+        <p>This Modal will slide down</h1>
     </div>
 ```
 

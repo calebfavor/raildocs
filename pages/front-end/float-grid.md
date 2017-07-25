@@ -1,6 +1,9 @@
 <style>
-    .col {  height:50px;border:1px solid #d1d1d1;text-align:center;line-height:48px;  }
+    .col {  min-height:50px;border:1px solid #d1d1d1;text-align:center;  }
+    h2 {  background:#000;color:#fff;  }
 </style>
+
+###### Float Grid
 
 # Rows
 
@@ -45,14 +48,34 @@ Here is a table showing how certain aspects of the grid behave on certain breakp
 
 Columns and rows both have a gutter size of 1.875rem (30px) half of the gutter width is added to each side of the container on desktop and tablets, while one third of the gutter width is added to each side on mobile.
 
-Gutters can be removed from rows and columns by adding the collapsed class to the container
+Gutters can be removed from rows and columns by adding the .collapse class to the container
 
 ```html
-    <div class="row collapsed">
+    <div class="row collapse">
     ...
     </div>
-    <div class="col lg-2 md-4 sm-6 collapsed">
+    <div class="col lg-2 md-4 sm-6 collapse">
     ...
+    </div>
+```
+
+<div class="row">
+<div class="col sm-4 md-4 lg-3" style="font-size:0;margin-right:15px;">
+<img src="https://placehold.it/400x400?text=With+Gutters">
+</div>
+<div class="col sm-4 md-4 lg-3 collapse" style="font-size:0;">
+<img src="https://placehold.it/400x400?text=Without+Gutters">
+</div>
+</div>
+
+```html
+    <div class="row">
+        <div class="col sm-6 md-4 lg-3">
+            <img src="https://placehold.it/400x400?text=With+Gutters">
+        </div>
+        <div class="col sm-6 md-4 lg-3 collapse">
+            <img src="https://placehold.it/400x400?text=Without+Gutters">
+        </div>
     </div>
 ```
 
