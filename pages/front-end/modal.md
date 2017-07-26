@@ -3,7 +3,7 @@
 # Basic Usage
 
 * Modals are instantiated by adding the class .modal to a container and a unique ID
-* Modls are triggered by adding the data attribute "data-open-modal" and matching it with the unique ID of the modal you wish to open
+* Modals are triggered by adding the data attribute "data-open-modal" to a clickable element and matching it with the unique ID of the modal you wish to open
 
 <button class="button" data-open-modal="defaultModal">Modal</button>
 

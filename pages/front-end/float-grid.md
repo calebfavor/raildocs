@@ -64,7 +64,7 @@ Gutters can be removed from rows and columns by adding the .collapse class to th
 <img src="https://placehold.it/400x400?text=With+Gutters">
 </div>
 <div class="col sm-4 md-4 lg-3 collapse" style="font-size:0;">
-<img src="https://placehold.it/400x400?text=Without+Gutters">
+<img src="https://placehold.it/400x351?text=Without+Gutters">
 </div>
 </div>
 
