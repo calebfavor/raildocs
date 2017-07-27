@@ -332,6 +332,9 @@ $(function () {
                 new SubCategory('Accordion', 'front-end/accordion.md'),
                 new SubCategory('Navigation', 'front-end/navigation.md'),
                 new SubCategory('Loading', 'front-end/loading.md')
+            ]),
+            new PrimaryCategory('Icons', [
+                new SubCategory('Icons', 'front-end/icons.md')
             ])
         ]),
         new Tab('Misc Dev', []),
