@@ -324,7 +324,8 @@ $(function () {
         new Tab('Front End', [
             new PrimaryCategory('Grid', [
                 new SubCategory('Float Grid', 'front-end/float-grid.md'),
-                new SubCategory('Flex Grid', 'front-end/flex-grid.md')
+                new SubCategory('Flex Grid', 'front-end/flex-grid.md'),
+                new SubCategory('Responsive Ratios', 'front-end/ratios.md')
             ]),
             new PrimaryCategory('Components', [
                 new SubCategory('Buttons', 'front-end/buttons.md'),
