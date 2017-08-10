@@ -334,6 +334,12 @@ $(function () {
                 new SubCategory('Navigation', 'front-end/navigation.md'),
                 new SubCategory('Loading', 'front-end/loading.md')
             ]),
+            new PrimaryCategory('Form Validation', [
+                new SubCategory('Usage', 'front-end/forms/usage.md'),
+                new SubCategory('Validation Rules', 'front-end/forms/rules.md'),
+                new SubCategory('Methods', 'front-end/forms/methods.md'),
+                new SubCategory('Events', 'front-end/forms/events.md')
+            ]),
             new PrimaryCategory('Icons', [
                 new SubCategory('Icons', 'front-end/icons.md')
             ])
