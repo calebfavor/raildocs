@@ -10,9 +10,9 @@
 
 # editValidationMessages
 
-| Method                                  | Returns      |  Description                                             |
-|-----------------------------------------|--------------|----------------------------------------------------------|
-| editValidationMessages(object)          | JSON         |  Edits the validation error messages                     |
+| Method                                  |  Description                                             |
+|-----------------------------------------|----------------------------------------------------------|
+| editValidationMessages(object)          |  Edits the validation error messages                     |
 
 ```javascript
     myValidation.editValidationMessages({
