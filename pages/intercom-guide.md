@@ -13,4 +13,6 @@ All new users of the following types are added:
 
 They're added with a tag indicating the SKU of what they've purchased.
 
-This and many other pieces of information are available when creating "[auto messages](https://docs.intercom.com/intercom-s-key-features-explained/sending-messages/how-auto-messages-work)".
+This and many other pieces of information are available when creating "<a 
+href="https://docs.intercom.com/intercom-s-key-features-explained/sending-messages/how-auto-messages-work" 
+target="blank">auto messages</a>".
