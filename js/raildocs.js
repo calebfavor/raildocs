@@ -346,8 +346,12 @@ $(function () {
         ]),
         new Tab('Misc Dev', []),
         new TabSplitter(),
-        new Tab('Support', []),
-        new Tab('Accounting', []),
+        new Tab('Support (incl. Marketing and Community Managers)', [
+            new PrimaryCategory('Intercom Guide', 'intercom-guide.md')
+        ]),
+        new Tab('Accounting', [
+            new PrimaryCategory('Intercom Guide', 'intercom-guide.md')
+        ])
 
     ];
 
