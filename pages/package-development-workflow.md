@@ -218,6 +218,20 @@ For the "railroad\intercomeo" package, for example:
 
 ![phpstorm phpunit interpreter settings for package](/raildocs/images/package-development-workflow/phpstorm-phpunit-interpreter-settings-for-package.gif)
 
+
+### Toggling between Testing application and package
+
+#### From application to package
+
+1. [ ] edit application *composer.json*
+    1. [ ] specify package namespace
+    1. [ ] define location of dev package files
+    1. [ ] add to requirement list. (Will likely just define as `dev-packagename`).
+1. [ ] run `composer update` in your application.
+1. [ ] change your PHPUnit settings in PHPStorm (specify dev package *autoload.php* and *phpunit.xml* locations)
+    1. [ ] *PHPUnit Library → path to script*
+    1. [ ] *Test Runner" → Default configuration file*
+
 ---------------------------------------------------------------
 
 **Start developing!**
